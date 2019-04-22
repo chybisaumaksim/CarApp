@@ -26,13 +26,14 @@ Should be done:
 2. Search Car by Colour API   
 3. Store Enum 'Colour' in database as String
 4. Document REST API with Swagger
-5. Serialize/deserialize car's colour in enum 'Colour'
+5. Serialize/deserialize car's colour in enum 'Colour' using upper anl lower case colour value
 6. Implement Controller Advice
 7. Use Console and File Appenders
 8. Implement Logging in the REST service according to best practices
 9. Implement Exception Handling in the REST service according to best practices
-10. Change logging level in runtime using Spring Boot Actuator endpoints
-11. In a separate branch/fork, use slf4j + log4j2 with modified config
+10. Validate Car
+11. Change logging level in runtime using Spring Boot Actuator endpoints
+12. In a separate branch/fork, use slf4j + log4j2 with modified config
         
         
   
