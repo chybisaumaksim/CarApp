@@ -26,7 +26,7 @@ Should be done:
 2. Search Car by Colour API   
 3. Store Enum 'Colour' in database as String
 4. Document REST API with Swagger
-5. Serialize/deserialize car's colour in enum 'Colour' using upper anl lower case colour value
+5. Serialize/deserialize car's colour in enum 'Colour' using upper and lower case colour value
 6. Implement Controller Advice
 7. Use Console and File Appenders
 8. Implement Logging in the REST service according to best practices
