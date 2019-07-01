@@ -22,12 +22,15 @@ Should be used:
 5. log4j2
 
 Should be done:
+---For Module 11---
 1. CRUD operations(on Controller and Repository layer)
 2. Search Car by Colour API   
 3. Store Enum 'Colour' in database as String
 4. Document REST API with Swagger
 5. Serialize/deserialize car's colour in enum 'Colour' using upper and lower case colour value
 6. Implement Controller Advice
+
+---For Module 12---
 7. Use Console and File Appenders
 8. Implement Logging in the REST service according to best practices
 9. Implement Exception Handling in the REST service according to best practices
