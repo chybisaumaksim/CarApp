@@ -1,11 +1,13 @@
 package com.godeltech.pt11.service;
 
 import com.godeltech.pt11.dto.Car;
+import com.godeltech.pt11.dto.Colour;
 import com.godeltech.pt11.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import javax.persistence.EntityNotFoundException;
+
 
 @Service
 public class CarService {
@@ -13,7 +15,7 @@ public class CarService {
     @Autowired
     private CarRepository carRepository;
 
-    public List<Car> getAllCars() {
+    public Iterable<Car> getAllCars() {
         return carRepository.findAll();
     }
 
@@ -21,19 +23,20 @@ public class CarService {
         carRepository.deleteById(id);
     }
 
-    public void createCar(Car car) {
-        carRepository.save(car);
+    public Car createCar(Car car) {
+        return carRepository.save(car);
     }
 
     public Car getCar(Long id) {
-        return carRepository.getOne(id);
+        return carRepository.findById(id)
+                .orElseThrow(EntityNotFoundException::new);
     }
 
     public Car updateCar(Car car) {
         return carRepository.save(car);
     }
 
-//    public List<Car> getCarByColour(Colour colour) {
-//        return carRepository.findByColour(colour);
-//    }
+    public Iterable<Car> getCarByColour(Colour colour) {
+        return carRepository.findByColour(colour);
+    }
 }
