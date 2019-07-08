@@ -3,7 +3,7 @@ package com.godeltech.pt11.service;
 import com.godeltech.pt11.converter.CarMapper;
 import com.godeltech.pt11.dto.CarDTO;
 import com.godeltech.pt11.entity.Car;
-import com.godeltech.pt11.entity.Colour;
+import com.godeltech.pt11.entity.enums.Colour;
 import com.godeltech.pt11.repository.CarRepository;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;

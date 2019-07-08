@@ -3,14 +3,16 @@ package com.godeltech.pt11.service;
 import com.godeltech.pt11.converter.CarMapper;
 import com.godeltech.pt11.dto.CarDTO;
 import com.godeltech.pt11.entity.Car;
-import com.godeltech.pt11.entity.Colour;
+import com.godeltech.pt11.entity.enums.Colour;
 import com.godeltech.pt11.repository.CarRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class CarService {
 

@@ -1,7 +1,7 @@
 package com.godeltech.pt11.repository;
 
 import com.godeltech.pt11.entity.Car;
-import com.godeltech.pt11.entity.Colour;
+import com.godeltech.pt11.entity.enums.Colour;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

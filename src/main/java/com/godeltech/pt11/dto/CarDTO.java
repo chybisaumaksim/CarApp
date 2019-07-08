@@ -1,20 +1,20 @@
 package com.godeltech.pt11.dto;
 
-import com.godeltech.pt11.entity.Colour;
+import com.godeltech.pt11.entity.enums.Colour;
 import lombok.*;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@NoArgsConstructor
 @Setter
 @Getter
 @EqualsAndHashCode
+@NoArgsConstructor
 public class CarDTO {
 
     @Id
     @GeneratedValue
-    private Long carId;
+    private  Long carId;
 
     private String model;
 

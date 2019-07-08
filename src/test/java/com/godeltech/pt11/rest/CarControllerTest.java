@@ -4,8 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.godeltech.pt11.PtApplication;
 import com.godeltech.pt11.converter.CarMapper;
 import com.godeltech.pt11.entity.Car;
-import com.godeltech.pt11.entity.Colour;
+import com.godeltech.pt11.entity.enums.Colour;
 import com.godeltech.pt11.service.CarService;
+import lombok.RequiredArgsConstructor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
         classes = PtApplication.class)
 @TestPropertySource(locations = "classpath:application2.properties")
 @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:schema.sql")
+@RequiredArgsConstructor
 @AutoConfigureMockMvc
 public class CarControllerTest {
 

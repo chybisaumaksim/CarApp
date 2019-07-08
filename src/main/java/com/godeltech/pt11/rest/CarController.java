@@ -1,22 +1,18 @@
 package com.godeltech.pt11.rest;
 
 import com.godeltech.pt11.dto.CarDTO;
-import com.godeltech.pt11.entity.Colour;
+import com.godeltech.pt11.entity.enums.Colour;
 import com.godeltech.pt11.service.CarService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-
+@RequiredArgsConstructor
 @RestController
 public class CarController {
 
-    private final CarService carService;
-
     @Autowired
-    public CarController(final CarService carService) {
-        this.carService = carService;
-    }
+    private CarService carService;
 
     @GetMapping("cars")
     public Iterable<CarDTO> getAll() {

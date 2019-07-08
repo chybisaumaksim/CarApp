@@ -1,13 +1,11 @@
 package com.godeltech.pt11.entity;
 
+import com.godeltech.pt11.entity.enums.Colour;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
-@EqualsAndHashCode
 @Entity
 @Table(name = "cars")
 public class Car {
@@ -20,14 +18,6 @@ public class Car {
 
     @Enumerated(EnumType.STRING)
     private Colour colour;
-
-    public Colour getColour() {
-        return colour;
-    }
-
-    public void setColour(Colour colour) {
-        this.colour = colour;
-    }
 
     public Car(Long carId, String model, Colour colour) {
         this.carId = carId;

@@ -2,8 +2,9 @@ package com.godeltech.pt11.converter;
 
 import com.godeltech.pt11.dto.CarDTO;
 import com.godeltech.pt11.entity.Car;
-import com.godeltech.pt11.entity.Colour;
+import com.godeltech.pt11.entity.enums.Colour;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,11 +14,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Transactional
 public class CarMapperTest {
 
-    private CarMapper carMapper;
+    private CarMapper carMapper = new CarMapper();
 
-   public CarMapperTest() {
-        carMapper = new CarMapper();
-    }
+//    public CarMapperTest() {
+//        carMapper = new CarMapper();
+//    }
 
     private Car car = new Car(1L, "A5", Colour.GREEN);
     private CarDTO carDTO = new CarDTO(1L, "A5", Colour.GREEN);
