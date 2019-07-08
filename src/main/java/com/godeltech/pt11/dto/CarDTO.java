@@ -1,19 +1,15 @@
 package com.godeltech.pt11.dto;
 
 import com.godeltech.pt11.entity.Colour;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @NoArgsConstructor
-@Data
+@Setter
+@Getter
 @EqualsAndHashCode
-@Entity
 public class CarDTO {
 
     @Id
