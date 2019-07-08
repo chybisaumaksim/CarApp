@@ -1,13 +1,11 @@
 package com.godeltech.pt11.entity;
-import lombok.AllArgsConstructor;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
 @EqualsAndHashCode
 @Entity
@@ -15,7 +13,7 @@ import javax.persistence.*;
 public class Car {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long carId;
 
     private String model;
@@ -29,5 +27,19 @@ public class Car {
 
     public void setColour(Colour colour) {
         this.colour = colour;
+    }
+
+    public Car(Long carId, String model, Colour colour) {
+        this.carId = carId;
+        this.model = model;
+        this.colour = colour;
+    }
+
+    public Car(String model, Colour colour) {
+        this.model = model;
+        this.colour = colour;
+    }
+
+    public Car() {
     }
 }

@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
 @EqualsAndHashCode
 @Entity
@@ -24,4 +23,10 @@ public class CarDTO {
     private String model;
 
     private Colour colour;
+
+    public CarDTO(Long carId, String model, Colour colour) {
+        this.carId = carId;
+        this.model = model;
+        this.colour = colour;
+    }
 }

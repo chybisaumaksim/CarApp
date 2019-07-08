@@ -19,33 +19,32 @@ public class CarController {
     }
 
     @GetMapping("cars")
-    public Iterable<CarDTO> getAllCars() {
+    public Iterable<CarDTO> getAll() {
         return carService.getAllCars();
     }
 
     @DeleteMapping("cars/{id}")
-    public void deleteCar(@PathVariable long id) {
+    public void delete(@PathVariable long id) {
         carService.deleteCar(id);
     }
 
     @GetMapping("cars/{id}")
-    public CarDTO getCar(@PathVariable Long id) {
+    public CarDTO get(@PathVariable Long id) {
         return carService.getCar(id);
     }
 
-    @Valid()
     @PostMapping("cars")
     public CarDTO create(@RequestBody CarDTO carDTO) {
         return carService.createCar(carDTO);
     }
 
     @PutMapping("cars")
-    public CarDTO updateEmployee(@RequestBody CarDTO carDTO) {
+    public CarDTO update(@RequestBody CarDTO carDTO) {
         return carService.updateCar(carDTO);
     }
 
     @GetMapping("cars/byColour/{colour}")
-    public Iterable<CarDTO> findCarByColour(@PathVariable String colour) {
+    public Iterable<CarDTO> findByColour(@PathVariable String colour) {
         return carService.getCarByColour(Colour.valueOf(colour.toUpperCase()));
     }
 }
