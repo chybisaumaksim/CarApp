@@ -1,11 +1,10 @@
-package com.godeltech.pt11.dto;
+package com.godeltech.pt11.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor

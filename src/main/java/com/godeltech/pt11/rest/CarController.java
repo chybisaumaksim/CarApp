@@ -1,11 +1,12 @@
 package com.godeltech.pt11.rest;
 
-import com.godeltech.pt11.dto.Car;
+import com.godeltech.pt11.dto.CarDTO;
+import com.godeltech.pt11.entity.Colour;
 import com.godeltech.pt11.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.validation.Valid;
 
 @RestController
 public class CarController {
@@ -18,7 +19,7 @@ public class CarController {
     }
 
     @GetMapping("cars")
-    public List<Car> getAllCars() {
+    public Iterable<CarDTO> getAllCars() {
         return carService.getAllCars();
     }
 
@@ -28,23 +29,23 @@ public class CarController {
     }
 
     @GetMapping("cars/{id}")
-    public Car getCar(@PathVariable Long id) {
+    public CarDTO getCar(@PathVariable Long id) {
         return carService.getCar(id);
     }
 
+    @Valid()
     @PostMapping("cars")
-    public Car create(@RequestBody Car car) {
-        carService.createCar(car);
-        return car;
+    public CarDTO create(@RequestBody CarDTO carDTO) {
+        return carService.createCar(carDTO);
     }
 
     @PutMapping("cars")
-    public void updateEmployee(@RequestBody Car car) {
-        carService.updateCar(car);
+    public CarDTO updateEmployee(@RequestBody CarDTO carDTO) {
+        return carService.updateCar(carDTO);
     }
 
-//    @GetMapping("cars/byColor/{color}")
-//    public List<Car> findCarByColour(@PathVariable Colour colour) {
-//        return carService.getCarByColour(colour);
-//    }
+    @GetMapping("cars/byColour/{colour}")
+    public Iterable<CarDTO> findCarByColour(@PathVariable String colour) {
+        return carService.getCarByColour(Colour.valueOf(colour.toUpperCase()));
+    }
 }

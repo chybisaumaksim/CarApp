@@ -10,7 +10,7 @@ Using the provided skeleton, implement the REST service:
 
 2. Check that the application is running. Open the link http://localhost:8080/pt11/ in your browser. You should see "Spring is here!".
 3. Complete the implementation of the CarService class using the knowledge gained so that cars can be saved, found and updated in the database.    
-4. Complete the implementation of the CarController to provide API which cover CRUD operations for a car object.
+4. Complete the implementation of the CarController to provide API which cover CRUD operations for a carDTO object.
 
 Useful link: https://spring.io/guides/gs/rest-service/
 
@@ -27,7 +27,7 @@ Should be done:
 2. Search Car by Colour API   
 3. Store Enum 'Colour' in database as String
 4. Document REST API with Swagger
-5. Serialize/deserialize car's colour in enum 'Colour' using upper and lower case colour value
+5. Serialize/deserialize carDTO's colour in enum 'Colour' using upper and lower case colour value
 6. Implement Controller Advice
 
 ---For Module 12---
