@@ -6,25 +6,20 @@ import lombok.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
+@Setter
 @EqualsAndHashCode
 @ToString
-@NoArgsConstructor
-@Builder
 public class CarDTO {
 
     @Id
     @GeneratedValue
-    private  Long carId;
+    private Long carId;
 
     private String model;
 
     private Colour colour;
-
-    public CarDTO(Long carId, String model, Colour colour) {
-        this.carId = carId;
-        this.model = model;
-        this.colour = colour;
-    }
 }

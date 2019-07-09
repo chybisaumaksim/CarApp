@@ -8,12 +8,10 @@ import com.godeltech.pt11.repository.CarRepository;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,8 +41,8 @@ public class CarServiceTest {
     private Car car;
     private CarDTO carDTO;
 
-    @BeforeEach
-    public void setCar() {
+    @BeforeAll
+    public void setUp() {
         car = new Car(1L, "A5", Colour.GREEN);
         carDTO = new CarDTO(1L, "A5", Colour.GREEN);
     }

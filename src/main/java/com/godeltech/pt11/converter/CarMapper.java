@@ -19,4 +19,6 @@ public class CarMapper {
     public CarDTO fromEntity(Car car) {
         return modelMapper.map(car, CarDTO.class);
     }
+
+
 }
