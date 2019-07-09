@@ -2,6 +2,7 @@ package com.godeltech.pt11.dto;
 
 import com.godeltech.pt11.entity.enums.Colour;
 import lombok.*;
+import org.hibernate.action.spi.Executable;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

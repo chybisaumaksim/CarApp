@@ -5,12 +5,14 @@ import com.godeltech.pt11.dto.CarDTO;
 import com.godeltech.pt11.entity.Car;
 import com.godeltech.pt11.entity.enums.Colour;
 import com.godeltech.pt11.repository.CarRepository;
+import com.google.common.collect.Lists;
+import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.EntityNotFoundException;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -23,11 +25,11 @@ public class CarService {
     private CarMapper carMapper;
 
     public Iterable<CarDTO> getAllCars() {
-        List<CarDTO> carDTOList = new ArrayList<>();
-        carRepository.
-                findAll().
-                forEach(car -> carDTOList.add(carMapper.fromEntity(car)));
-        return carDTOList;
+        return Lists
+                .newArrayList(carRepository.findAll())
+                .stream()
+                .map(car -> carMapper.fromEntity(car))
+                .collect(Collectors.toList());
     }
 
     public void deleteCar(Long id) {
@@ -35,22 +37,30 @@ public class CarService {
     }
 
     public CarDTO createCar(CarDTO carDTO) {
-        return carMapper.fromEntity(carRepository.save(carMapper.toEntity(carDTO)));
+        return carMapper
+                .fromEntity(carRepository
+                        .save(carMapper
+                                .toEntity(carDTO)));
     }
 
     public CarDTO getCar(Long id) {
-        return carMapper.fromEntity(carRepository.findById(id).orElse(new Car()));
+        return carMapper
+                .fromEntity(carRepository
+                        .findById(id)
+                        .orElseThrow(EntityNotFoundException::new));
     }
 
     public CarDTO updateCar(CarDTO carDTO) {
-        return carMapper.fromEntity(carRepository.save(carMapper.toEntity(carDTO)));
+        return carMapper
+                .fromEntity(carRepository
+                        .save(carMapper.toEntity(carDTO)));
     }
 
-    public List<CarDTO> getCarByColour(Colour colour) {
-        List<CarDTO> carDTOList = new ArrayList<>();
-        carRepository.
-                findByColour(colour).
-                forEach(car -> carDTOList.add(carMapper.fromEntity(car)));
-        return carDTOList;
+    public Iterable<CarDTO> getCarByColour(Colour colour) {
+        return carRepository.
+                findByColour(colour)
+                .stream()
+                .map((car -> carMapper.fromEntity(car)))
+                .collect(Collectors.toList());
     }
 }
