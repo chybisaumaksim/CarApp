@@ -3,12 +3,16 @@ package com.godeltech.pt11.rest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.godeltech.pt11.PtApplication;
 import com.godeltech.pt11.converter.CarMapper;
+import com.godeltech.pt11.dto.CarDTO;
 import com.godeltech.pt11.entity.Car;
 import com.godeltech.pt11.entity.enums.Colour;
 import com.godeltech.pt11.service.CarService;
 import lombok.RequiredArgsConstructor;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -56,7 +60,8 @@ public class CarControllerTest {
     @Test
     @Transactional(readOnly = true)
     public void getAllCars() throws Exception {
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/cars")
+        String uri = "/cars";
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(uri)
                 .accept(MediaType.APPLICATION_JSON))
                 .andReturn();
         assertEquals(200, mvcResult.getResponse().getStatus());
@@ -77,7 +82,7 @@ public class CarControllerTest {
         String uri = "/cars/1";
         MvcResult mvcResult = mockMvc
                 .perform(MockMvcRequestBuilders.get(uri)
-                .contentType(MediaType.APPLICATION_JSON_VALUE))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andReturn();
         assertEquals(200, mvcResult.getResponse().getStatus());
     }
@@ -85,7 +90,12 @@ public class CarControllerTest {
     @Test
     public void createCar() throws Exception {
         String uri = "/cars";
-        Car car = new Car(2L, "A6", Colour.RED);
+         Car car = Car
+                .builder()
+                .carId(2L)
+                .model("A5")
+                .colour(Colour.RED)
+                .build();
         String carAsString = objectMapper.writeValueAsString(car);
         mockMvc.perform(MockMvcRequestBuilders.post(uri)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -97,7 +107,12 @@ public class CarControllerTest {
     @Test
     public void updateCar() throws Exception {
         String uri = "/cars";
-        Car car = new Car(1L, "A5", Colour.RED);
+        Car car = Car
+                .builder()
+                .carId(1L)
+                .model("A6")
+                .colour(Colour.RED)
+                .build();
         String carAsString = objectMapper.writeValueAsString(car);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.put(uri)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -109,7 +124,12 @@ public class CarControllerTest {
     @Transactional(readOnly = true)
     public void findCarByColour() throws Exception {
         String uri = "/cars/byColour/RED";
-        Car car = new Car(1L, "A5", Colour.RED);
+        Car car = Car
+                .builder()
+                .carId(1L)
+                .model("A6")
+                .colour(Colour.RED)
+                .build();
         String carAsString = objectMapper.writeValueAsString(car);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(uri)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)

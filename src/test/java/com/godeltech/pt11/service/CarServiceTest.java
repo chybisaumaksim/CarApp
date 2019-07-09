@@ -5,7 +5,6 @@ import com.godeltech.pt11.dto.CarDTO;
 import com.godeltech.pt11.entity.Car;
 import com.godeltech.pt11.entity.enums.Colour;
 import com.godeltech.pt11.repository.CarRepository;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.runner.RunWith;
@@ -38,11 +37,11 @@ public class CarServiceTest {
     @Mock
     private CarMapper carMapper;
 
-    private Car car;
-    private CarDTO carDTO;
+    private static Car car;
+    private static CarDTO carDTO;
 
     @BeforeAll
-    public void setUp() {
+    static void setUp() {
         car = new Car(1L, "A5", Colour.GREEN);
         carDTO = new CarDTO(1L, "A5", Colour.GREEN);
     }
@@ -68,13 +67,19 @@ public class CarServiceTest {
         assertEquals(carDTO, actual);
     }
 
-    @Ignore
     @Test
     @Transactional(readOnly = true)
     public void getCar() {
-        when(carRepository.findById(anyLong())).thenReturn(Optional.ofNullable(car));
-        when(carMapper.fromEntity(car)).thenReturn(carDTO);
-        when(carMapper.toEntity(carDTO)).thenReturn(car);
+        when(carRepository.findById(anyLong()))
+                .thenReturn(
+                        Optional.of(
+                                Optional.ofNullable(car).
+                                        orElse(Car
+                                                .builder()
+                                                .carId(1L)
+                                                .model("A6")
+                                                .colour(Colour.RED)
+                                                .build())));
         CarDTO actual = carService.getCar(1L);
         assertEquals(carDTO, actual);
     }

@@ -22,13 +22,23 @@ public class CarMapperTest {
     @Mock
     private CarMapper carMapper;
 
-    private Car car;
-    private CarDTO carDTO;
+    private static Car car;
+    private static CarDTO carDTO;
 
     @BeforeAll
-    public void setUp() {
-        car = new Car(1L, "A5", Colour.GREEN);
-        carDTO = new CarDTO(1L, "A5", Colour.GREEN);
+    static void setUp() {
+        carDTO = CarDTO
+                .builder()
+                .carId(1L)
+                .model("A5")
+                .colour(Colour.GREEN)
+                .build();
+        car = Car
+                .builder()
+                .carId(1L)
+                .model("A5")
+                .colour(Colour.GREEN)
+                .build();
     }
 
     @Test
