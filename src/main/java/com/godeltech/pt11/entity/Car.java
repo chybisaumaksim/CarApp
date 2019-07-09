@@ -1,20 +1,19 @@
 package com.godeltech.pt11.entity;
 
 import com.godeltech.pt11.entity.enums.Colour;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
+@Data
 @Entity
 @Table(name = "cars")
-//@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Car {
 
     @Id
@@ -25,10 +24,4 @@ public class Car {
 
     @Enumerated(EnumType.STRING)
     private Colour colour;
-
-//
-//    @JsonSetter
-//    public Colour setColour(Colour colour) {
-//        return Colour.valueOf(colour.toString().toUpperCase());
-//    }
 }

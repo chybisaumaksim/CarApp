@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class CarMapper {
 
     @Autowired
-    private ModelMapper modelMapper = new ModelMapper();
+    private ModelMapper modelMapper;
 
     public Car toEntity(CarDTO carDTO) {
         return modelMapper.map(carDTO, Car.class);

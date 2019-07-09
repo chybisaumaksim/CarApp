@@ -26,8 +26,7 @@ public class CarService {
 
     public Iterable<CarDTO> getAllCars() {
         return Lists
-                .newArrayList(carRepository.findAll())
-                .stream()
+                .newArrayList(carRepository.findAll()).stream()
                 .map(car -> carMapper.fromEntity(car))
                 .collect(Collectors.toList());
     }
@@ -57,9 +56,7 @@ public class CarService {
     }
 
     public Iterable<CarDTO> getCarByColour(Colour colour) {
-        return carRepository.
-                findByColour(colour)
-                .stream()
+        return carRepository.findByColour(colour).stream()
                 .map((car -> carMapper.fromEntity(car)))
                 .collect(Collectors.toList());
     }
