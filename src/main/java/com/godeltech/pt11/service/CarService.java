@@ -2,18 +2,18 @@ package com.godeltech.pt11.service;
 
 import com.godeltech.pt11.converter.CarMapper;
 import com.godeltech.pt11.dto.CarDTO;
-import com.godeltech.pt11.entity.Car;
 import com.godeltech.pt11.entity.enums.Colour;
 import com.godeltech.pt11.repository.CarRepository;
 import com.google.common.collect.Lists;
-import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.stream.Collectors;
 
+@Transactional
 @RequiredArgsConstructor
 @Service
 public class CarService {

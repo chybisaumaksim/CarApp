@@ -1,13 +1,17 @@
 package com.godeltech.pt11.entity;
 
 import com.godeltech.pt11.entity.enums.Colour;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name = "cars")
+@Builder
 public class Car {
 
     @Id

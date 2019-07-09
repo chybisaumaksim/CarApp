@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -48,12 +49,13 @@ public class CarControllerTest {
     private CarController carController;
 
     @Test
-    public void getController() {
+    public void checkIfControllerNotNull() {
         assertThat(carController).isNotNull();
     }
 
     @Test
-    public void getAll() throws Exception {
+    @Transactional(readOnly = true)
+    public void getAllCars() throws Exception {
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/cars")
                 .accept(MediaType.APPLICATION_JSON))
                 .andReturn();
@@ -61,7 +63,7 @@ public class CarControllerTest {
     }
 
     @Test
-    public void delete() throws Exception {
+    public void deleteCar() throws Exception {
         String uri = "/cars/1";
         MvcResult mvcResult = mockMvc
                 .perform(MockMvcRequestBuilders.delete(uri))
@@ -70,7 +72,8 @@ public class CarControllerTest {
     }
 
     @Test
-    public void get() throws Exception {
+    @Transactional(readOnly = true)
+    public void getCar() throws Exception {
         String uri = "/cars/1";
         MvcResult mvcResult = mockMvc
                 .perform(MockMvcRequestBuilders.get(uri)
@@ -80,19 +83,19 @@ public class CarControllerTest {
     }
 
     @Test
-    public void create() throws Exception {
+    public void createCar() throws Exception {
         String uri = "/cars";
-        Car car = new Car(1L, "A6", Colour.RED);
+        Car car = new Car(2L, "A6", Colour.RED);
         String carAsString = objectMapper.writeValueAsString(car);
         mockMvc.perform(MockMvcRequestBuilders.post(uri)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(carAsString))
                 .andReturn();
-        assertEquals(carMapper.fromEntity(car), carService.getCar(1L));
+        assertEquals(carMapper.fromEntity(car), carService.getCar(2L));
     }
 
     @Test
-    public void update() throws Exception {
+    public void updateCar() throws Exception {
         String uri = "/cars";
         Car car = new Car(1L, "A5", Colour.RED);
         String carAsString = objectMapper.writeValueAsString(car);
@@ -103,7 +106,8 @@ public class CarControllerTest {
     }
 
     @Test
-    public void findByColour() throws Exception {
+    @Transactional(readOnly = true)
+    public void findCarByColour() throws Exception {
         String uri = "/cars/byColour/RED";
         Car car = new Car(1L, "A5", Colour.RED);
         String carAsString = objectMapper.writeValueAsString(car);
