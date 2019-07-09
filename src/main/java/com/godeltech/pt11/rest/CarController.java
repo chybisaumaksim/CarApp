@@ -1,6 +1,7 @@
 package com.godeltech.pt11.rest;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.godeltech.pt11.deserializer.CarEnumConverter;
 import com.godeltech.pt11.dto.CarDTO;
 import com.godeltech.pt11.entity.Car;
 import com.godeltech.pt11.entity.enums.Colour;
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Api(value = "Cars")
 public class CarController {
+
+    @Autowired
+    private CarEnumConverter carEnumConverter;
 
     @Autowired
     private CarService carService;
@@ -58,6 +62,7 @@ public class CarController {
         return carService.createCar(carDTO);
     }
 
+
     @ApiOperation(value = "Update car")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Car updated successful"),
@@ -67,6 +72,7 @@ public class CarController {
         return carService.updateCar(carDTO);
     }
 
+
     @ApiOperation(value = "Find all the cars by selected colour")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful"),
@@ -74,7 +80,7 @@ public class CarController {
             @ApiResponse(code = 500, message = "Internal Server Error")})
     @JsonCreator
     @GetMapping("cars/byColour/{colour}")
-    public Iterable<CarDTO> findCarByColour(@PathVariable Colour colour) {
-        return carService.getCarByColour(colour);
+    public Iterable<CarDTO> findCarByColour(@PathVariable String colour) {
+        return carService.getCarByColour(carEnumConverter.convert(colour));
     }
 }
