@@ -1,14 +1,10 @@
 package com.godeltech.pt11.rest;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.godeltech.pt11.deserializer.CarEnumConverter;
 import com.godeltech.pt11.dto.CarDTO;
 import com.godeltech.pt11.rest.apidescriptions.*;
 import com.godeltech.pt11.service.CarService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,11 +16,15 @@ import javax.validation.constraints.Positive;
 @Api(value = "Cars")
 public class CarController {
 
-    @Autowired
     private CarEnumConverter carEnumConverter;
 
-    @Autowired
     private CarService carService;
+
+    @Autowired
+    public CarController(CarService carService, CarEnumConverter carEnumConverter) {
+        this.carService = carService;
+        this.carEnumConverter = carEnumConverter;
+    }
 
     @GetAllCarsApiDescription
     @GetMapping("cars")
@@ -57,7 +57,6 @@ public class CarController {
     }
 
     @FindCarByColourApiDescription
-    @JsonCreator
     @GetMapping("cars/byColour/{colour}")
     public Iterable<CarDTO> findCarByColour(@PathVariable String colour) {
         return carService.getCarByColour(carEnumConverter.convert(colour));

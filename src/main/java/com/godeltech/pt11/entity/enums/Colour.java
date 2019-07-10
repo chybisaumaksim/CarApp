@@ -15,5 +15,5 @@ public enum Colour {
             }
         }
         throw new EnumConstantNotPresentException(Colour.class, "Not such colour");
-    }
+}
 }
