@@ -5,27 +5,21 @@ import com.godeltech.pt11.dto.CarDTO;
 import com.godeltech.pt11.rest.apidescriptions.*;
 import com.godeltech.pt11.service.CarService;
 import io.swagger.annotations.Api;
-import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 
-@RequiredArgsConstructor
 @RestController
 @Api(value = "Cars")
 @Validated
 public class CarController {
 
-    private CarEnumConverter carEnumConverter;
+    private final CarEnumConverter carEnumConverter;
 
-    private CarService carService;
+    private final CarService carService;
 
-    @Autowired
     public CarController(CarEnumConverter carEnumConverter, CarService carService) {
         this.carEnumConverter = carEnumConverter;
         this.carService = carService;
@@ -56,9 +50,9 @@ public class CarController {
     }
 
     @UpdateCarApiDescription
-    @PutMapping("cars")
-    public CarDTO updateCar(@Valid @RequestBody CarDTO carDTO) {
-        return carService.updateCar(carDTO);
+    @PutMapping("cars/{id}")
+    public CarDTO updateCar(@Valid @RequestBody CarDTO carDTO, @Valid @PathVariable @Min(1) Long id) {
+        return carService.updateCar(carDTO, id);
     }
 
     @FindCarByColourApiDescription

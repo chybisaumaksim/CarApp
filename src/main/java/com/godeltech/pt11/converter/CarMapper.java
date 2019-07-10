@@ -13,12 +13,14 @@ public class CarMapper {
     private ModelMapper modelMapper;
 
     public Car toEntity(CarDTO carDTO) {
-        return modelMapper.map(carDTO, Car.class);
+        return Car
+                .builder()
+                .model(carDTO.getModel())
+                .colour(carDTO.getColour())
+                .build();
     }
 
     public CarDTO fromEntity(Car car) {
         return modelMapper.map(car, CarDTO.class);
     }
-
-
 }
