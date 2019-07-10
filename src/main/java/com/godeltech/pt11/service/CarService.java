@@ -3,14 +3,17 @@ package com.godeltech.pt11.service;
 import com.godeltech.pt11.converter.CarMapper;
 import com.godeltech.pt11.dto.CarDTO;
 import com.godeltech.pt11.entity.enums.Colour;
+import com.godeltech.pt11.exceptions.CarNotFoundException;
 import com.godeltech.pt11.repository.CarRepository;
+import com.godeltech.pt11.rest.CarController;
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.stream.Collectors;
 
 @Transactional
@@ -18,10 +21,10 @@ import java.util.stream.Collectors;
 @Service
 public class CarService {
 
-    @Autowired
+    private static Logger logger = LoggerFactory.getLogger(CarService.class);
+
     private CarRepository carRepository;
 
-    @Autowired
     private CarMapper carMapper;
 
     public Iterable<CarDTO> getAllCars() {
@@ -36,6 +39,7 @@ public class CarService {
     }
 
     public CarDTO createCar(CarDTO carDTO) {
+        logger.info("Creating new Car");
         return carMapper
                 .fromEntity(carRepository
                         .save(carMapper
@@ -46,13 +50,19 @@ public class CarService {
         return carMapper
                 .fromEntity(carRepository
                         .findById(id)
-                        .orElseThrow(EntityNotFoundException::new));
+                        .orElseThrow(() -> new CarNotFoundException(id)));
     }
 
     public CarDTO updateCar(CarDTO carDTO) {
-        return carMapper
-                .fromEntity(carRepository
-                        .save(carMapper.toEntity(carDTO)));
+        Long carId = carDTO.getCarId();
+        if (carRepository.findById(carId).isPresent()) {
+            return carMapper
+                    .fromEntity(carRepository
+                            .save(carMapper.toEntity(carDTO)));
+        } else {
+            logger.error("Car with " + carId + " not exists in database");
+            throw new CarNotFoundException(carId);
+        }
     }
 
     public Iterable<CarDTO> getCarByColour(Colour colour) {

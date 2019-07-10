@@ -1,19 +1,14 @@
 package com.godeltech.pt11.entity.enums;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+import java.lang.annotation.Annotation;
 
-public enum Colour {
+public enum Colour implements Annotation {
     RED,
     BLUE,
     GREEN;
 
-    @JsonCreator
-    public static Colour of(String value) {
-        for (Colour item : Colour.values()) {
-            if (value.equals(item.name())) {
-                return item;
-            }
-        }
-        throw new EnumConstantNotPresentException(Colour.class, "Not such colour");
-}
+    @Override
+    public Class<? extends Annotation> annotationType() {
+        return null;
+    }
 }
