@@ -69,11 +69,11 @@ public class CarControllerTest {
 
     @Test
     public void deleteCar() throws Exception {
-        String uri = "/cars/1";
+        String uri = "/cars/2";
         MvcResult mvcResult = mockMvc
                 .perform(MockMvcRequestBuilders.delete(uri))
                 .andReturn();
-        assertEquals(200, mvcResult.getResponse().getStatus());
+        assertEquals(404, mvcResult.getResponse().getStatus());
     }
 
     @Test
@@ -84,7 +84,7 @@ public class CarControllerTest {
                 .perform(MockMvcRequestBuilders.get(uri)
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andReturn();
-        assertEquals(200, mvcResult.getResponse().getStatus());
+        assertEquals(404, mvcResult.getResponse().getStatus());
     }
 
     @Test
@@ -92,7 +92,7 @@ public class CarControllerTest {
         String uri = "/cars";
          Car car = Car
                 .builder()
-                .carId(2L)
+                 .carId(1L)
                 .model("A5")
                 .colour(Colour.RED)
                 .build();
@@ -101,23 +101,23 @@ public class CarControllerTest {
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(carAsString))
                 .andReturn();
-        assertEquals(carMapper.fromEntity(car), carService.getCar(2L));
+        assertEquals(carMapper.fromEntity(car), carService.getCar(1L));
     }
 
     @Test
     public void updateCar() throws Exception {
-        String uri = "/cars";
+        String uri = "/cars/1";
         Car car = Car
                 .builder()
                 .carId(1L)
                 .model("A6")
-                .colour(Colour.RED)
+                .colour(Colour.GREEN)
                 .build();
         String carAsString = objectMapper.writeValueAsString(car);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.put(uri)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(carAsString)).andReturn();
-        assertEquals(200, mvcResult.getResponse().getStatus());
+        assertEquals(404, mvcResult.getResponse().getStatus());
     }
 
     @Test

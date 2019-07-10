@@ -1,6 +1,7 @@
 package com.godeltech.pt11.exceptions;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.WebRequest;
@@ -10,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
+@Slf4j
 @Component
 public class CustomErrorAttributes extends DefaultErrorAttributes {
 
@@ -27,6 +29,7 @@ public class CustomErrorAttributes extends DefaultErrorAttributes {
             errorAttributes.put("message", "invalid value");
             errorAttributes.put("status", "400");
         }
+        log.error(errorAttributes.values().toString());
         return errorAttributes;
     }
 }
