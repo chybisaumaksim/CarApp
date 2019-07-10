@@ -9,8 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.Positive;
-
 @RequiredArgsConstructor
 @RestController
 @Api(value = "Cars")
@@ -21,9 +19,9 @@ public class CarController {
     private CarService carService;
 
     @Autowired
-    public CarController(CarService carService, CarEnumConverter carEnumConverter) {
-        this.carService = carService;
+    public CarController(CarEnumConverter carEnumConverter, CarService carService) {
         this.carEnumConverter = carEnumConverter;
+        this.carService = carService;
     }
 
     @GetAllCarsApiDescription
@@ -40,7 +38,7 @@ public class CarController {
 
     @GetCarApiDescription
     @GetMapping("cars/{id}")
-    public CarDTO getCar(@Positive @PathVariable Long id) {
+    public CarDTO getCar(@PathVariable Long id) {
         return carService.getCar(id);
     }
 
