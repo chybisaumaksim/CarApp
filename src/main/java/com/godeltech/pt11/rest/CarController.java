@@ -5,11 +5,9 @@ import com.godeltech.pt11.dto.CarDTO;
 import com.godeltech.pt11.rest.apidescriptions.*;
 import com.godeltech.pt11.service.CarService;
 import io.swagger.annotations.Api;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RequiredArgsConstructor
 @RestController
 @Api(value = "Cars")
 public class CarController {

@@ -28,7 +28,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
         classes = PtApplication.class)
 @TestPropertySource(locations = "classpath:application2.properties")
 @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:schema.sql")
-@RequiredArgsConstructor
 @AutoConfigureMockMvc
 public class CarControllerTest {
 
