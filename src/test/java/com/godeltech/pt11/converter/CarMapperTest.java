@@ -4,7 +4,6 @@ import com.godeltech.pt11.dto.CarDTO;
 import com.godeltech.pt11.entity.Car;
 import com.godeltech.pt11.entity.enums.Colour;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;

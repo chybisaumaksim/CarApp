@@ -18,11 +18,15 @@ import java.util.stream.Collectors;
 @Service
 public class CarService {
 
-    @Autowired
     private CarRepository carRepository;
 
-    @Autowired
     private CarMapper carMapper;
+
+    @Autowired
+    public CarService(CarRepository carRepository, CarMapper carMapper) {
+        this.carRepository = carRepository;
+        this.carMapper = carMapper;
+    }
 
     public Iterable<CarDTO> getAllCars() {
         return Lists

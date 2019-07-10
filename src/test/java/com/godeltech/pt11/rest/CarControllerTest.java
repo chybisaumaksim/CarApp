@@ -3,16 +3,12 @@ package com.godeltech.pt11.rest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.godeltech.pt11.PtApplication;
 import com.godeltech.pt11.converter.CarMapper;
-import com.godeltech.pt11.dto.CarDTO;
 import com.godeltech.pt11.entity.Car;
 import com.godeltech.pt11.entity.enums.Colour;
 import com.godeltech.pt11.service.CarService;
 import lombok.RequiredArgsConstructor;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,7 +21,6 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -41,21 +36,13 @@ public class CarControllerTest {
     MockMvc mockMvc;
 
     @Autowired
-    private CarMapper carMapper;
+    CarMapper carMapper;
 
     @Autowired
     private CarService carService;
 
     @Autowired
     private ObjectMapper objectMapper;
-
-    @Autowired
-    private CarController carController;
-
-    @Test
-    public void checkIfControllerNotNull() {
-        assertThat(carController).isNotNull();
-    }
 
     @Test
     @Transactional(readOnly = true)
@@ -90,7 +77,7 @@ public class CarControllerTest {
     @Test
     public void createCar() throws Exception {
         String uri = "/cars";
-         Car car = Car
+        Car car = Car
                 .builder()
                 .carId(2L)
                 .model("A5")
