@@ -8,18 +8,14 @@ import com.godeltech.pt11.exceptions.CarNotFoundException;
 import com.godeltech.pt11.exceptions.NotConsistDataException;
 import com.godeltech.pt11.repository.CarRepository;
 import com.google.common.collect.Lists;
-import javassist.NotFoundException;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,7 +26,8 @@ import java.util.stream.StreamSupport;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 @SpringBootTest
@@ -72,8 +69,8 @@ public class CarServiceTest {
         carTwo = Car
                 .builder()
                 .carId(1L)
-                .model("A5")
-                .colour(Colour.GREEN)
+                .model("A6")
+                .colour(Colour.RED)
                 .build();
     }
 
@@ -145,25 +142,29 @@ public class CarServiceTest {
     public void updateCarThrowNotConsistDataException() {
         // given
         Long id = 2L;
-        // when
-//        when(carService.updateCar(carDTO, id)).thenReturn(carDTO);
-        verify(carService.updateCar(carDTO, id));
-//        when(carRepository.save(car)).thenReturn(car);
-//        when(modelMapper.map(car, CarDTO.class)).thenReturn(carDTO);
-//        CarDTO actual = carService.updateCar(carDTO, 1L);
-//        assertEquals(carDTO, actual);
+        // then
+        carService.updateCar(carDTO, id);
+    }
+
+    @Test(expected = CarNotFoundException.class)
+    public void updateCarThrowCarNotFoundException() {
+        // given
+        Long id = 1L;
+        // then
+        carService.updateCar(carDTO, id);
     }
 
     @Test
-    public void updateCar() {
+    public void updateCarShouldRunPositive() {
         // given
-        Long id = 2L;
-        // when
-        when(carService.updateCar(carDTO, id)).thenReturn(carDTO);
-
-        when(carRepository.save(car)).thenReturn(car);
+        Long id = 1L;
+//         when
+        when(carRepository.findById(id)).thenReturn(Optional.ofNullable(car));
+        when(modelMapper.map(carDTO, Car.class)).thenReturn(car);
         when(modelMapper.map(car, CarDTO.class)).thenReturn(carDTO);
-        CarDTO actual = carService.updateCar(carDTO, 1L);
+        when(carRepository.save(car)).thenReturn(carTwo);
+        // then
+        CarDTO actual = carService.updateCar(carDTO, id);
         assertEquals(carDTO, actual);
     }
 
