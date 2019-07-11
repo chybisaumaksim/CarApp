@@ -32,7 +32,7 @@ public class CustomErrorAttributes extends DefaultErrorAttributes {
             errorAttributes.put("message", "invalid value");
             errorAttributes.put("status", "400");
         }
-        log.error(errorAttributes.values().toString());
+        log.debug(errorAttributes.values().toString());
         return errorAttributes;
     }
 }

@@ -1,15 +1,13 @@
 package com.godeltech.pt11.dto;
 
 import com.godeltech.pt11.entity.enums.Colour;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 public class CarDTO {
 
     private Long carId;

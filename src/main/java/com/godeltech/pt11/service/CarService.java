@@ -56,11 +56,8 @@ public class CarService {
             throw new NotConsistDataException();
         }
         Car car = modelMapper.map(carDTO, Car.class);
-        if (carRepository.findById(id).isPresent()) {
-            carRepository.save(car);
-        } else {
-            throw new CarNotFoundException(id);
-        }
+        carRepository.findById(id).orElseThrow(()->new CarNotFoundException(id));
+        carRepository.save(car);
         return modelMapper.map(car, CarDTO.class);
     }
 

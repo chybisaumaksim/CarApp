@@ -12,6 +12,7 @@ import java.lang.annotation.Target;
 @ApiResponses(
         value = {
                 @ApiResponse(code = 200, message = "Success"),
+                @ApiResponse(code = 400, message = "Bad request. Mismatch data"),
                 @ApiResponse(code = 404, message = "Car with current ID not found"),
                 @ApiResponse(code = 500, message = "Server Error")})
 @ApiOperation(value = "Update car")

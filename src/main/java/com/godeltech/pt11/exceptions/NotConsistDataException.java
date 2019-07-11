@@ -7,6 +7,5 @@ public class NotConsistDataException extends RuntimeException {
 
     public NotConsistDataException() {
         super("No consistent data exception. Mismatch ID");
-        log.error("No consistent data exception. Mismatch ID");
     }
 }
