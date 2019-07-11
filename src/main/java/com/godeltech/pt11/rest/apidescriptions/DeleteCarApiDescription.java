@@ -13,7 +13,9 @@ import java.lang.annotation.Target;
         value = {
                 @ApiResponse(code = 200, message = "Success"),
                 @ApiResponse(code = 400, message = "Other error"),
+                @ApiResponse(code = 404, message = "Car with current ID not found"),
                 @ApiResponse(code = 500, message = "Server error")})
+
 @ApiOperation(value = "Delete car")
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)

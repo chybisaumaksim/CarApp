@@ -9,6 +9,6 @@ public enum Colour implements Annotation {
 
     @Override
     public Class<? extends Annotation> annotationType() {
-        return null;
+        return Colour.class;
     }
 }
