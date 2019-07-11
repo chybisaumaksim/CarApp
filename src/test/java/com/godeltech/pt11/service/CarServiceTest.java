@@ -26,7 +26,6 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 @SpringBootTest
-@Transactional
 public class CarServiceTest {
 
     @Mock

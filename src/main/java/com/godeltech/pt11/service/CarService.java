@@ -6,7 +6,6 @@ import com.godeltech.pt11.entity.Car;
 import com.godeltech.pt11.entity.enums.Colour;
 import com.godeltech.pt11.exceptions.CarNotFoundException;
 import com.godeltech.pt11.repository.CarRepository;
-import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,10 +46,10 @@ public class CarService {
     }
 
     public CarDTO getCar(Long id) {
-        return carMapper
-                .fromEntity(carRepository
-                        .findById(id)
-                        .orElseThrow(() -> new CarNotFoundException(id)));
+        CarDTO carDTO = carMapper.fromEntity(carRepository
+                .findById(id)
+                .orElseThrow(() -> new CarNotFoundException(id)));
+        return carDTO;
     }
 
     public CarDTO updateCar(CarDTO carDTO, Long id) {

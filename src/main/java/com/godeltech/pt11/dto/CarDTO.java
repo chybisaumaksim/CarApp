@@ -6,17 +6,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class CarDTO {
 
-    @Id
-    @GeneratedValue
     private Long carId;
 
     private String model;
