@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Transactional
 @Service
@@ -24,9 +25,9 @@ public class CarService {
     private CarMapper carMapper;
 
     public Iterable<CarDTO> getAllCars() {
-        return Lists
-                .newArrayList(carRepository.findAll()).stream()
-                .map(car -> carMapper.fromEntity(car))
+        return StreamSupport
+                .stream(carRepository.findAll().spliterator(), false)
+                .map(carMapper::fromEntity)
                 .collect(Collectors.toList());
     }
 

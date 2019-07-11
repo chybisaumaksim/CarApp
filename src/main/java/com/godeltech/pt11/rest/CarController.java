@@ -2,6 +2,7 @@ package com.godeltech.pt11.rest;
 
 import com.godeltech.pt11.deserializer.CarEnumConverter;
 import com.godeltech.pt11.dto.CarDTO;
+import com.godeltech.pt11.entity.enums.Colour;
 import com.godeltech.pt11.rest.apidescriptions.*;
 import com.godeltech.pt11.service.CarService;
 import io.swagger.annotations.Api;
@@ -57,7 +58,7 @@ public class CarController {
 
     @FindCarByColourApiDescription
     @GetMapping("cars/byColour/{colour}")
-    public Iterable<CarDTO> findCarByColour(@Valid @PathVariable String colour) {
-        return carService.getCarByColour(carEnumConverter.convert(colour));
+    public Iterable<CarDTO> findCarByColour(@Valid @PathVariable Colour colour) {
+        return carService.getCarByColour(colour);
     }
 }
