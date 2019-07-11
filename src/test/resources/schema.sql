@@ -9,4 +9,5 @@ CREATE TABLE IF NOT EXISTS CAR
     colour varchar (12)
 );
 
-INSERT into CAR values (1, 'A4', 'RED')
+INSERT into CAR values (1, 'A4', 'RED');
+INSERT into CAR values (2, 'A6', 'RED');
