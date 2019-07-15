@@ -23,5 +23,6 @@
             <column name="colour" value="RED"/>
         </insert>
     </changeSet>
+
 </databaseChangeLog>
 

@@ -79,15 +79,15 @@ public class CarControllerTest {
     }
 
 
-//    @Test
-//    public void update() throws JsonProcessingException {
-//        CarDTO carDto = new CarDTO(1L, "A4", GREEN);
-//        ResponseEntity<CarDTO> employeeResponseEntity = restTemplate.exchange(
-//                RequestEntity.put(URI.create(baseUrl + port + contextPath + "/cars/1"))
-//                        .contentType(MediaType.APPLICATION_JSON_UTF8)
-//                        .body(mapper.writeValueAsString(carDto)), CarDTO.class);
-//        Assert.assertEquals(HttpStatus.OK, employeeResponseEntity.getStatusCode());
-//    }
+    @Test
+    public void update() throws JsonProcessingException {
+        CarDTO carDto = new CarDTO(1L, "A4", GREEN);
+        ResponseEntity<CarDTO> employeeResponseEntity = restTemplate.exchange(
+                RequestEntity.put(URI.create(baseUrl + port + contextPath + "/cars/1"))
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .body(mapper.writeValueAsString(carDto)), CarDTO.class);
+        Assert.assertEquals(HttpStatus.OK, employeeResponseEntity.getStatusCode());
+    }
 
     @AfterAll
     @Test
