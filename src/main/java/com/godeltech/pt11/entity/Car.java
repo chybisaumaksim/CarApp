@@ -18,10 +18,13 @@ public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Long id;
 
+    @Column(name="model")
     private String model;
 
     @Enumerated(EnumType.STRING)
+    @Column(name="colour")
     private Colour colour;
 }

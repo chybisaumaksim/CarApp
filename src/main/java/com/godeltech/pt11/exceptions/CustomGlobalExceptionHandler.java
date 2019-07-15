@@ -31,7 +31,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public void constraintViolationException(CarNotFoundException ex, HttpServletResponse response) throws IOException {
+    public void constraintViolationException(ConstraintViolationException ex, HttpServletResponse response) throws IOException {
         response.sendError(HttpStatus.BAD_REQUEST.value());
         log.info(String.format("Request: %s", ex.getLocalizedMessage()));
     }
