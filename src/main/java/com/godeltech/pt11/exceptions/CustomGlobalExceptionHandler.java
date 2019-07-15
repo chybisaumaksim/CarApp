@@ -26,19 +26,23 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         errors.setTimestamp(LocalDateTime.now());
         errors.setError(ex.getMessage());
         errors.setStatus(HttpStatus.NOT_FOUND.value());
-        log.info(String.format("Request: %s", ex.getLocalizedMessage()));
+        log.info("Request: {}", ex.getMessage());
         return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public void constraintViolationException(CarNotFoundException ex, HttpServletResponse response) throws IOException {
+    public ResponseEntity<CustomErrorResponse> constraintViolationException(ConstraintViolationException ex, HttpServletResponse response, WebRequest request) throws IOException {
+        CustomErrorResponse errors = new CustomErrorResponse();
+        errors.setTimestamp(LocalDateTime.now());
+        errors.setError(ex.getMessage());
         response.sendError(HttpStatus.BAD_REQUEST.value());
-        log.info(String.format("Request: %s", ex.getLocalizedMessage()));
+        log.info("Request: {}", ex.getMessage());
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(NotConsistDataException.class)
     public void notConsistDataException(NotConsistDataException ex, HttpServletResponse response) throws IOException {
         response.sendError(HttpStatus.BAD_REQUEST.value());
-        log.info(String.format("Request: %s", ex.getLocalizedMessage()));
+        log.info("Request: {}", ex.getMessage());
     }
 }

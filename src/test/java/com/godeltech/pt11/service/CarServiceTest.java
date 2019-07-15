@@ -26,8 +26,7 @@ import java.util.stream.StreamSupport;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 @SpringBootTest
@@ -81,6 +80,8 @@ public class CarServiceTest {
         // then
         Iterable<CarDTO> actual = carService.getAllCars();
         assertEquals(Collections.EMPTY_LIST, actual);
+        verify(carRepository).findAll();
+        verifyNoMoreInteractions(modelMapper, carRepository);
     }
 
     @Test
@@ -96,12 +97,18 @@ public class CarServiceTest {
                 .map(car -> modelMapper.map(carDTO, Car.class))
                 .collect(Collectors.toList());
         assertEquals(cars, actual);
+        verify(carRepository).findAll();
+        verify(modelMapper, times(2)).map(car, CarDTO.class);
+        verify(modelMapper, times(2)).map(carDTO, Car.class);
+        verifyNoMoreInteractions(modelMapper, carRepository);
     }
 
 
     @Test(expected = CarNotFoundException.class)
     public void deleteCarShouldRunException() {
         carService.deleteCar(anyLong());
+        verify(carRepository).deleteById(anyLong());
+        verifyNoMoreInteractions(modelMapper, carRepository);
     }
 
     @Test
@@ -112,7 +119,9 @@ public class CarServiceTest {
         when(carRepository.findById(id)).thenReturn(Optional.of(car));
         // then
         carService.deleteCar(id);
+        verify(carRepository).findById(id);
         verify(carRepository).delete(car);
+        verifyNoMoreInteractions(modelMapper, carRepository);
     }
 
     @Test
@@ -124,6 +133,10 @@ public class CarServiceTest {
         // then
         CarDTO actual = carService.createCar(carDTOCreate);
         assertEquals(carDTO, actual);
+        verify(carRepository).save(car);
+        verify(modelMapper, times(1)).map(car, CarDTO.class);
+        verify(modelMapper, times(1)).map(carDTOCreate, Car.class);
+        verifyNoMoreInteractions(modelMapper, carRepository);
     }
 
     @Test
@@ -136,6 +149,9 @@ public class CarServiceTest {
         // then
         CarDTO actual = carService.getCar(1L);
         assertEquals(carDTO, actual);
+        verify(carRepository).findById(1L);
+        verify(modelMapper).map(car, CarDTO.class);
+        verifyNoMoreInteractions(modelMapper, carRepository);
     }
 
     @Test(expected = NotConsistDataException.class)
@@ -144,6 +160,9 @@ public class CarServiceTest {
         Long id = 2L;
         // then
         carService.updateCar(carDTO, id);
+        verify(carRepository).save(car);
+        verify(modelMapper, times(1)).map(carDTO, Car.class);
+        verifyNoMoreInteractions(modelMapper, carRepository);
     }
 
     @Test(expected = CarNotFoundException.class)
@@ -152,6 +171,9 @@ public class CarServiceTest {
         Long id = 1L;
         // then
         carService.updateCar(carDTO, id);
+        verify(carRepository).save(car);
+        verify(modelMapper).map(carDTO, Car.class);
+        verifyNoMoreInteractions(modelMapper, carRepository);
     }
 
     @Test
@@ -166,6 +188,11 @@ public class CarServiceTest {
         // then
         CarDTO actual = carService.updateCar(carDTO, id);
         assertEquals(carDTO, actual);
+        verify(carRepository).save(car);
+        verify(carRepository).findById(id);
+        verify(modelMapper).map(carDTO, Car.class);
+        verify(modelMapper).map(car, CarDTO.class);
+        verifyNoMoreInteractions(modelMapper, carRepository);
     }
 
     @Test
@@ -175,6 +202,8 @@ public class CarServiceTest {
         // then
         Iterable<CarDTO> actual = carService.getCarByColour(Colour.RED);
         assertEquals(Collections.EMPTY_LIST, actual);
+        verify(carRepository).findByColour(Colour.RED);
+        verifyNoMoreInteractions(modelMapper, carRepository);
     }
 
     @Test
@@ -188,5 +217,8 @@ public class CarServiceTest {
         // then
         Iterable<CarDTO> actual = carService.getCarByColour(Colour.GREEN);
         assertEquals(expected, actual);
+        verify(carRepository).findByColour(Colour.GREEN);
+        verify(modelMapper, times(2)).map(car, CarDTO.class);
+        verifyNoMoreInteractions(modelMapper, carRepository);
     }
 }

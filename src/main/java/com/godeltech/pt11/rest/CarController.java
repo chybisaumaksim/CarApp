@@ -34,7 +34,7 @@ public class CarController {
 
     @GetCarApiDescription
     @GetMapping("cars/{id}")
-    public CarDTO getCar(@PathVariable @Min(1) Long id) {
+    public CarDTO getCar(@PathVariable @Min(1) long id) {
         return carService.getCar(id);
     }
 
@@ -46,7 +46,7 @@ public class CarController {
 
     @UpdateCarApiDescription
     @PutMapping("cars/{id}")
-    public CarDTO updateCar(@RequestBody CarDTO carDTO, @PathVariable @Min(1) Long id) {
+    public CarDTO updateCar(@RequestBody CarDTO carDTO, @PathVariable @Min(1) long id) {
         return carService.updateCar(carDTO, id);
     }
 

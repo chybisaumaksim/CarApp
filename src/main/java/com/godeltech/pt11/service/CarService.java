@@ -9,7 +9,6 @@ import com.godeltech.pt11.exceptions.NotConsistDataException;
 import com.godeltech.pt11.repository.CarRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,7 +52,7 @@ public class CarService {
 
     public CarDTO updateCar(CarDTO carDTO, Long id) {
         if (!carDTO.getCarId().equals(id)) {
-            throw new NotConsistDataException();
+            throw new NotConsistDataException(carDTO.getCarId(), id);
         }
         Car car = modelMapper.map(carDTO, Car.class);
         carRepository.findById(id).orElseThrow(()->new CarNotFoundException(id));
