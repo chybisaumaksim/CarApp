@@ -62,13 +62,13 @@ public class CarServiceTest {
                 .build();
         car = Car
                 .builder()
-                .carId(1L)
+                .id(1L)
                 .model("A5")
                 .colour(Colour.GREEN)
                 .build();
         carTwo = Car
                 .builder()
-                .carId(1L)
+                .id(1L)
                 .model("A6")
                 .colour(Colour.RED)
                 .build();

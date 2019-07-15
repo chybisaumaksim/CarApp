@@ -8,6 +8,7 @@ import com.godeltech.pt11.entity.Car;
 import com.godeltech.pt11.entity.enums.Colour;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,6 +22,7 @@ import java.net.URI;
 import java.util.List;
 
 import static com.godeltech.pt11.entity.enums.Colour.GREEN;
+import static com.godeltech.pt11.entity.enums.Colour.RED;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(
@@ -51,7 +53,7 @@ public class CarControllerTest {
 
     @Test
     public void createCar() throws JsonProcessingException {
-        Car car=new Car(1L, "A10", GREEN);
+        Car car=new Car(1L, "A10", RED);
         ResponseEntity<CarDTO> carResponseEntity = restTemplate.exchange(
             RequestEntity.post(URI.create(baseUrl + port + contextPath + "/cars"))
                     .contentType(MediaType.APPLICATION_JSON_UTF8)
@@ -77,19 +79,20 @@ public class CarControllerTest {
     }
 
 
-    @Test
-    public void update() throws JsonProcessingException {
-        CarDTO carDto = new CarDTO(1L, "A4", Colour.RED);
-        ResponseEntity<CarDTO> employeeResponseEntity = restTemplate.exchange(
-                RequestEntity.put(URI.create(baseUrl + port + contextPath + "/cars"))
-                        .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .body(mapper.writeValueAsString(carDto)), CarDTO.class);
-        Assert.assertEquals(HttpStatus.OK, employeeResponseEntity.getStatusCode());
-    }
+//    @Test
+//    public void update() throws JsonProcessingException {
+//        CarDTO carDto = new CarDTO(1L, "A4", GREEN);
+//        ResponseEntity<CarDTO> employeeResponseEntity = restTemplate.exchange(
+//                RequestEntity.put(URI.create(baseUrl + port + contextPath + "/cars/1"))
+//                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+//                        .body(mapper.writeValueAsString(carDto)), CarDTO.class);
+//        Assert.assertEquals(HttpStatus.OK, employeeResponseEntity.getStatusCode());
+//    }
 
+    @AfterAll
     @Test
     public void deleteEmployee() {
-        final Long id = 1L;
+        final Long id = 2L;
         ResponseEntity<Car> employeeResponseEntity = restTemplate
                 .exchange(baseUrl + port + contextPath + "/cars/" + id, HttpMethod.DELETE, null, new ParameterizedTypeReference<Car>() {
                 });
