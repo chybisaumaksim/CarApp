@@ -5,15 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
-import java.io.IOException;
 import java.time.LocalDateTime;
 
 @Slf4j
@@ -24,7 +19,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     public ResponseEntity<CustomErrorResponse> customHandleNotFound(CarNotFoundException ex, WebRequest request) {
         CustomErrorResponse errors = new CustomErrorResponse();
         errors.setTimestamp(LocalDateTime.now());
-        errors.setError(ex.getMessage());
+        errors.setError(ex.getLocalizedMessage());
         errors.setStatus(HttpStatus.NOT_FOUND.value());
         log.info("Request: {}", ex.getMessage());
         return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
@@ -46,7 +41,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
             NotConsistDataException ex, WebRequest request) {
         CustomErrorResponse errors = new CustomErrorResponse();
         errors.setTimestamp(LocalDateTime.now());
-        errors.setError(ex.getMessage());
+        errors.setError(ex.getLocalizedMessage());
         errors.setStatus(HttpStatus.BAD_REQUEST.value());
         log.info("Request: {}", ex.getMessage());
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
