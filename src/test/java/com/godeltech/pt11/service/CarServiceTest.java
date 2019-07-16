@@ -50,7 +50,7 @@ public class CarServiceTest {
     public void setUp() {
         carDTO = CarDTO
                 .builder()
-                .carId(1L)
+                .id(1L)
                 .model("A5")
                 .colour(Colour.GREEN)
                 .build();
@@ -61,13 +61,13 @@ public class CarServiceTest {
                 .build();
         car = Car
                 .builder()
-                .carId(1L)
+                .id(1L)
                 .model("A5")
                 .colour(Colour.GREEN)
                 .build();
         carTwo = Car
                 .builder()
-                .carId(1L)
+                .id(1L)
                 .model("A6")
                 .colour(Colour.RED)
                 .build();
@@ -75,10 +75,11 @@ public class CarServiceTest {
 
     @Test
     public void getAllCarsReturnsEmptyList() {
-        // when
+        // given
         when(carRepository.findAll()).thenReturn(Collections.emptyList());
-        // then
+        // when
         Iterable<CarDTO> actual = carService.getAllCars();
+        // then
         assertEquals(Collections.EMPTY_LIST, actual);
         verify(carRepository).findAll();
         verifyNoMoreInteractions(modelMapper, carRepository);
@@ -88,14 +89,14 @@ public class CarServiceTest {
     public void getAllCarsShouldReturnListOfCars() {
         // given
         ArrayList<Car> cars = Lists.newArrayList(car, car);
-        // when
         when(carRepository.findAll()).thenReturn(cars);
         when(modelMapper.map(carDTO, Car.class)).thenReturn(car);
-        // then
+        // when
         Iterable<Car> actual = StreamSupport
                 .stream(carService.getAllCars().spliterator(), false)
                 .map(car -> modelMapper.map(carDTO, Car.class))
                 .collect(Collectors.toList());
+        // then
         assertEquals(cars, actual);
         verify(carRepository).findAll();
         verify(modelMapper, times(2)).map(car, CarDTO.class);
@@ -106,7 +107,9 @@ public class CarServiceTest {
 
     @Test(expected = CarNotFoundException.class)
     public void deleteCarShouldRunException() {
+        // when
         carService.deleteCar(anyLong());
+        // then
         verify(carRepository).deleteById(anyLong());
         verifyNoMoreInteractions(modelMapper, carRepository);
     }
@@ -115,10 +118,10 @@ public class CarServiceTest {
     public void deleteCarShouldDeleteCarById() {
         // given
         Long id = 1L;
-        // when
         when(carRepository.findById(id)).thenReturn(Optional.of(car));
-        // then
+        // when
         carService.deleteCar(id);
+        // then
         verify(carRepository).findById(id);
         verify(carRepository).delete(car);
         verifyNoMoreInteractions(modelMapper, carRepository);
@@ -126,12 +129,13 @@ public class CarServiceTest {
 
     @Test
     public void createCarShouldCreateNewCar() {
-        // when
+        // given
         when(modelMapper.map(carDTOCreate, Car.class)).thenReturn(car);
         when(modelMapper.map(car, CarDTO.class)).thenReturn(carDTO);
         when(carRepository.save(car)).thenReturn(car);
-        // then
+        // when
         CarDTO actual = carService.createCar(carDTOCreate);
+        // then
         assertEquals(carDTO, actual);
         verify(carRepository).save(car);
         verify(modelMapper, times(1)).map(car, CarDTO.class);
@@ -143,11 +147,11 @@ public class CarServiceTest {
     public void getOneCarById() {
         // given
         Long id = 1L;
-        // when
         when(carRepository.findById(id)).thenReturn(Optional.of(car));
         when(modelMapper.map(car, CarDTO.class)).thenReturn(carDTO);
-        // then
+        // when
         CarDTO actual = carService.getCar(1L);
+        // then
         assertEquals(carDTO, actual);
         verify(carRepository).findById(1L);
         verify(modelMapper).map(car, CarDTO.class);
@@ -158,8 +162,9 @@ public class CarServiceTest {
     public void updateCarThrowNotConsistDataException() {
         // given
         Long id = 2L;
-        // then
+        // when
         carService.updateCar(carDTO, id);
+        // then
         verify(carRepository).save(car);
         verify(modelMapper, times(1)).map(carDTO, Car.class);
         verifyNoMoreInteractions(modelMapper, carRepository);
@@ -169,8 +174,9 @@ public class CarServiceTest {
     public void updateCarThrowCarNotFoundException() {
         // given
         Long id = 1L;
-        // then
+        // when
         carService.updateCar(carDTO, id);
+        // then
         verify(carRepository).save(car);
         verify(modelMapper).map(carDTO, Car.class);
         verifyNoMoreInteractions(modelMapper, carRepository);
@@ -180,13 +186,13 @@ public class CarServiceTest {
     public void updateCarShouldRunPositive() {
         // given
         Long id = 1L;
-//         when
         when(carRepository.findById(id)).thenReturn(Optional.ofNullable(car));
         when(modelMapper.map(carDTO, Car.class)).thenReturn(car);
         when(modelMapper.map(car, CarDTO.class)).thenReturn(carDTO);
         when(carRepository.save(car)).thenReturn(carTwo);
-        // then
+        // when
         CarDTO actual = carService.updateCar(carDTO, id);
+        // then
         assertEquals(carDTO, actual);
         verify(carRepository).save(car);
         verify(carRepository).findById(id);
@@ -197,10 +203,11 @@ public class CarServiceTest {
 
     @Test
     public void getCarByColourReturnsEmptyList() {
-        // when
+        // given
         when(carRepository.findByColour(Colour.RED)).thenReturn(Collections.emptyList());
-        // then
+        // when
         Iterable<CarDTO> actual = carService.getCarByColour(Colour.RED);
+        // then
         assertEquals(Collections.EMPTY_LIST, actual);
         verify(carRepository).findByColour(Colour.RED);
         verifyNoMoreInteractions(modelMapper, carRepository);
@@ -211,11 +218,11 @@ public class CarServiceTest {
         // given
         List<Car> cars = Lists.newArrayList(car, car);
         List<CarDTO> expected = Lists.newArrayList(carDTO, carDTO);
-        // when
         when(carRepository.findByColour(Colour.GREEN)).thenReturn(cars);
         when(modelMapper.map(car, CarDTO.class)).thenReturn(carDTO);
-        // then
+        // when
         Iterable<CarDTO> actual = carService.getCarByColour(Colour.GREEN);
+        // then
         assertEquals(expected, actual);
         verify(carRepository).findByColour(Colour.GREEN);
         verify(modelMapper, times(2)).map(car, CarDTO.class);

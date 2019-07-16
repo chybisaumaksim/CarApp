@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Positive;
 
 @RestController
 @Api(value = "Cars")
@@ -28,13 +29,13 @@ public class CarController {
 
     @DeleteCarApiDescription
     @DeleteMapping("cars/{id}")
-    public void deleteCar(@PathVariable @Min(1) long id) {
+    public void deleteCar(@PathVariable @Positive long id) {
         carService.deleteCar(id);
     }
 
     @GetCarApiDescription
     @GetMapping("cars/{id}")
-    public CarDTO getCar(@PathVariable @Min(1) long id) {
+    public CarDTO getCar(@PathVariable @Positive long id) {
         return carService.getCar(id);
     }
 
@@ -46,7 +47,7 @@ public class CarController {
 
     @UpdateCarApiDescription
     @PutMapping("cars/{id}")
-    public CarDTO updateCar(@RequestBody CarDTO carDTO, @PathVariable @Min(1) long id) {
+    public CarDTO updateCar(@RequestBody CarDTO carDTO, @PathVariable @Positive long id) {
         return carService.updateCar(carDTO, id);
     }
 

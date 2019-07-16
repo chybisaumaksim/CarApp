@@ -51,8 +51,8 @@ public class CarService {
     }
 
     public CarDTO updateCar(CarDTO carDTO, Long id) {
-        if (!carDTO.getCarId().equals(id)) {
-            throw new NotConsistDataException(carDTO.getCarId(), id);
+        if (!carDTO.getId().equals(id)) {
+            throw new NotConsistDataException(carDTO.getId(), id);
         }
         Car car = modelMapper.map(carDTO, Car.class);
         carRepository.findById(id).orElseThrow(()->new CarNotFoundException(id));

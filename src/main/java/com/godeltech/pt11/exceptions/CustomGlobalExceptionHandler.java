@@ -31,18 +31,24 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<CustomErrorResponse> constraintViolationException(ConstraintViolationException ex, HttpServletResponse response, WebRequest request) throws IOException {
+    public ResponseEntity<CustomErrorResponse> constraintViolationException(
+            ConstraintViolationException ex, WebRequest request) {
         CustomErrorResponse errors = new CustomErrorResponse();
         errors.setTimestamp(LocalDateTime.now());
         errors.setError(ex.getMessage());
-        response.sendError(HttpStatus.BAD_REQUEST.value());
+        errors.setStatus(HttpStatus.BAD_REQUEST.value());
         log.info("Request: {}", ex.getMessage());
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(NotConsistDataException.class)
-    public void notConsistDataException(NotConsistDataException ex, HttpServletResponse response) throws IOException {
-        response.sendError(HttpStatus.BAD_REQUEST.value());
+    @ExceptionHandler({NotConsistDataException.class})
+    public ResponseEntity<CustomErrorResponse> notConsistDataException(
+            NotConsistDataException ex, WebRequest request) {
+        CustomErrorResponse errors = new CustomErrorResponse();
+        errors.setTimestamp(LocalDateTime.now());
+        errors.setError(ex.getMessage());
+        errors.setStatus(HttpStatus.BAD_REQUEST.value());
         log.info("Request: {}", ex.getMessage());
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 }

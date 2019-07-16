@@ -10,7 +10,7 @@ import lombok.*;
 @Setter
 public class CarDTO {
 
-    private Long carId;
+    private Long id;
 
     private String model;
 
