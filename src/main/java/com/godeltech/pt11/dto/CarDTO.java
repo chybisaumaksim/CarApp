@@ -15,7 +15,7 @@ import javax.validation.constraints.Positive;
 @AllArgsConstructor
 @Getter
 @Setter
-@Valid
+@ToString
 public class CarDTO {
 
     private Long id;

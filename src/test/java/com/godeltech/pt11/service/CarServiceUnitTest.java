@@ -117,8 +117,9 @@ public class CarServiceTest {
     public void deleteCarShouldDeleteCarById() {
         // given
         Long id = 1L;
-        when(carRepository.findById(id)).thenReturn(Optional.of(car));
         // when
+        when(carRepository.findById(id)).thenReturn(Optional.of(car));
+        // then
         carService.deleteCar(id);
         // then
         verify(carRepository).findById(id);
