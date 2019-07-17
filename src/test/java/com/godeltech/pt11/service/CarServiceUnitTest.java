@@ -31,7 +31,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 @SpringBootTest
-public class CarServiceTest {
+public class CarServiceUnitTest {
 
     @Mock
     private CarRepository carRepository;

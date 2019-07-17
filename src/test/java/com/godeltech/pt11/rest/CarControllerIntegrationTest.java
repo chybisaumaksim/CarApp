@@ -28,7 +28,7 @@ import static com.godeltech.pt11.entity.enums.Colour.RED;
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         classes = PtApplication.class)
-public class CarControllerTest {
+public class CarControllerIntegrationTest {
 
     @LocalServerPort
     private int port;

@@ -6,23 +6,29 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <changeSet id="1" author="Maks">
-        <createTable tableName="cars">
+        <createTable tableName="cars" catalogName="cars">
             <column name="id" type="int(11)" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
             <column name="model" type="varchar(20)"/>
             <column name="colour" type="varchar(20)"/>
         </createTable>
+    </changeSet>
 
-        <insert tableName="cars">
+    <changeSet id="2" author="Maks" >
+        <insert tableName="cars" catalogName="cars">
+            <column name="id" value="1"/>
             <column name="model" value="A7"/>
-            <column name="colour" value="RED"/>
-        </insert>
-        <insert tableName="cars">
-            <column name="model" value="A8"/>
             <column name="colour" value="RED"/>
         </insert>
     </changeSet>
 
-</databaseChangeLog>
+    <changeSet id="3" author="Maks" >
+        <insert tableName="cars" catalogName="cars">
+            <column name="id" value="2"/>
+            <column name="model" value="A8"/>
+            <column name="colour" value="GREEN"/>
+        </insert>
+    </changeSet>
 
+</databaseChangeLog>
