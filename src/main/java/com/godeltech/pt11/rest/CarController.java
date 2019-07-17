@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 
 @RestController
@@ -40,13 +41,13 @@ public class CarController {
 
     @CreateCarApiDescription
     @PostMapping("cars")
-    public CarDTO createCar(@RequestBody CarDTOCreate carDTOCreate) {
+    public CarDTO createCar(@Valid @RequestBody CarDTOCreate carDTOCreate) {
         return carService.createCar(carDTOCreate);
     }
 
     @UpdateCarApiDescription
     @PutMapping("cars/{id}")
-    public CarDTO updateCar(@RequestBody CarDTO carDTO, @PathVariable @Positive long id) {
+    public CarDTO updateCar(@Valid @RequestBody CarDTO carDTO, @PathVariable @Positive long id) {
         return carService.updateCar(carDTO, id);
     }
 
