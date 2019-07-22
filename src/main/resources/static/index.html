@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Cars</title>
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+
+<div class="header">
+    <input type="text" id="searchKey"/>
+    <button id="btnSearch" type="submit" id="bth-search"
+            class="btn btn-primary btn-lg">Search
+    </button>
+    <!--    <button id="btnAdd">New Wine</button>-->
+</div>
+
+
+<div class="leftArea">
+    <ul id="wineList"></ul>
+</div>
+
+<form id="wineForm">
+
+    <div class="mainArea">
+
+<!--        <label>Id:</label>-->
+<!--        <input id="id" name="id" type="text" disabled/>-->
+
+        <label>Model:</label>
+        <input type="text" id="model" name="model" required>
+
+        <label>Colour:</label>
+        <input type="text" id="colour" name="colour"/>
+        <!--        <select name="cars/byColour/">-->
+        <!--            <option value="RED">RED</option>-->
+        <!--            <option value="BLUE">BLUE</option>-->
+        <!--            <option value="GREEN">GREEN</option>-->
+        <!--        </select>-->
+    </div>
+
+    <button id="btnSave">Save</button>
+    <button id="btnDelete">Delete</button>
+
+    </div>
+</form>
+
+<script src="js/jquery-3.4.1.min.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
