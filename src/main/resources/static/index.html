@@ -2,46 +2,80 @@
 <html>
 <head>
     <title>Cars</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
     <link rel="stylesheet" type="text/css"
           href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.3/dist/bootstrap-table.min.css">
+    <link rel="stylesheet" type="text/css" href="css/myStyle.css">
 </head>
 <body>
 
-<div class="header">
-    <input type="text" id="searchKey"/>
-    <button id="btnSearch" type="submit" id="bth-search"
-            class="btn btn-primary btn-lg">Search
-    </button>
-    <!--    <button id="btnAdd">New Wine</button>-->
-</div>
-
-
-<div class="leftArea">
-    <ul id="wineList"></ul>
-</div>
-
-<form id="wineForm">
-
-    <div class="mainArea">
-
-<!--        <label>Id:</label>-->
-<!--        <input id="id" name="id" type="text" disabled/>-->
-
-        <label>Model:</label>
-        <input type="text" id="model" name="model" required>
-
-        <label>Colour:</label>
-        <input type="text" id="colour" name="colour"/>
+<div class="form-group" style="margin: 10px">
+    <p align="right">
+        <input type="text" placeholder="Colour" id="searchKey"/>
         <!--        <select name="cars/byColour/">-->
-        <!--            <option value="RED">RED</option>-->
+        <!--            <option selected value="RED" type="submit" class="btn btn-primary btn-sm">RED</option>-->
         <!--            <option value="BLUE">BLUE</option>-->
         <!--            <option value="GREEN">GREEN</option>-->
         <!--        </select>-->
+        <button id="btnSearch" type="submit" id="bth-search"
+                class="btn btn-primary btn-sm">Search by colour
+        </button>
+    </p>
+</div>
+
+<form id="carForm">
+
+    <div class="mainArea">
+
+        <!--         <p1>Add new car</p1>-->
+        <!--        <table>-->
+        <!--            <input hidden id="id" name="id" type="text" disabled/>-->
+        <!--            <th>-->
+        <!--                <label>Model:</label>-->
+        <!--                <input type="text" id="model" >-->
+        <!--            </th>-->
+        <!--            <th>-->
+        <!--                <label>Colour:</label>-->
+        <!--                <input type="text" id="colour" />-->
+        <!--            </th>-->
+        <!--        </table>-->
+        <table class="table table-bordered table-hover">
+            <thead>
+            <p1>Add new car</p1>
+            <tr>
+                <th>
+                    <label>Model:</label>
+                    <input type="text" id="model">
+                </th>
+                <th>
+                    <label>Colour:</label>-->
+                    <input type="text" id="colour"/>
+                </th>
+            </tr>
+            </thead>
+        </table>
+
+
+        <table id="carList" class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Model</th>
+                <th>Colour</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody id="cars_table_body">
+            </tbody>
+        </table>
+
+
     </div>
-
-    <button id="btnSave">Save</button>
-    <button id="btnDelete">Delete</button>
-
+    <button id="btnSave">Add</button>
+    <!--        <button id="btnDelete">Delete</button>-->
     </div>
 </form>
 
@@ -50,3 +84,6 @@
 
 </body>
 </html>
+
+
+
