@@ -2,27 +2,12 @@ var rootURL = "http://localhost:8080/pt11/cars";
 
 var currentCar;
 
-findAll();
-
-// $('#btnDelete').hide();
-
-// Register listeners
-$('#btnSearch').click(function () {
-    search($('#searchKey').val());
-    return false;
+$(document).ready(function () {
+    findAll();
 });
 
-// // Trigger search when pressing 'Return' on search key input field
-// $('#searchKey').keypress(function (e) {
-//     if (e.which == 13) {
-//         search($('#searchKey').val());
-//         e.preventDefault();
-//         return false;
-//     }
-// });
-
-$('#btnAdd').click(function () {
-    newCar();
+$('#btnSearch').click(function () {
+    search($('#searchKey').val());
     return false;
 });
 
@@ -31,32 +16,6 @@ $('#btnSave').click(function () {
     findAll();
     return false;
 });
-//
-// $('#btnSave').click(function () {
-//     if ($('#id').val() == '')
-//         addCar();
-//     else
-//         updateWine();
-//     return false;
-// });
-
-
-function btnDelete(id) {
-    $('#btnDelete').click(function () {
-        deleteCar(id);
-        return false;
-    });
-}
-
-$('#btnUpdate').click(function () {
-    updateCar();
-    return false;
-});
-
-// $('#carList a').live('click', function () {
-//     removeCar(a);
-// });
-
 
 function search(colour) {
     findByColour(colour);
@@ -84,7 +43,10 @@ function findByColour(colour) {
         type: 'GET',
         url: rootURL + '/byColour/' + colour,
         dataType: "json",
-        success: renderList
+        success: renderList,
+        error: function (jqXHR, textStatus) {
+            alert('findCars: ' + textStatus);
+        }
     });
 }
 
@@ -103,10 +65,9 @@ function addCar() {
                     '<td>' + car.id + '</td>' +
                     '<td>' + car.model + '</td>' +
                     '<td>' + car.colour + '</td>' +
-                    '<td style="width: 100px"><button class=\'btn btn-primary \' onclick="removeCar(' + car.id + ', this)">Remove</button></td>' +
+                    '<td style="width: 100px"><button class=\'btn btn-danger \' onclick="removeCar(' + car.id + ', this)">Remove</button></td>' +
                     '<td style="width: 100px"><button class=\'btn btn-primary \' onclick="updateCar(' + car.id + ')">Update</button></td>' +
                     '</tr>');
-                renderList;
             },
         error: function (jqXHR, textStatus, errorThrown) {
             alert('addCar: ' + textStatus);
@@ -114,72 +75,36 @@ function addCar() {
     });
 }
 
-function updateCar() {
+function updateCar(id, th) {
     console.log('updateCar');
     $.ajax({
         type: 'PUT',
         contentType: 'application/json',
-        url: rootURL + '/' + $('#id').val(),
+        url: rootURL + '/' + id,
         dataType: "json",
-        data: formToJSON(),
-        success: function (data, textStatus, jqXHR) {
+        data: formToJSON(id),
+        success: function () {
             $(th).closest('tr').hide();
         },
-        error: function (jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus,) {
             alert('updateCar: ' + textStatus);
         }
     });
 }
 
-// function deleteCar(id) {
-//     console.log('deleteCar');
-//     $.ajax({
-//         type: 'DELETE',
-//         url: rootURL + '/' + $('#id').val(),
-//         url: rootURL + '/' + id,
-//         success: function (data, textStatus, jqXHR) {
-//         },
-//         error: function (jqXHR, textStatus, errorThrown) {
-//             alert('deleteCar: ' + textStatus);
-//         }
-//     });
-// }
-
-function deleteCar() {
-    console.log('deleteCar');
-    $.ajax({
-        type: 'DELETE',
-        url: rootURL + '/' + $('#id').val(),
-        success: function (data, textStatus, jqXHR) {
-            alert('Wine deleted successfully');
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert('deleteWine error');
-        }
-    });
-}
-
 function removeCar(id, th) {
+    console.log('removeCar');
     $.ajax({
         type: 'DELETE',
-        url: rootURL + '/' + $('#id').val(),
-        success: function (data, textStatus, jqXHR) {
+        url: rootURL + '/' + id,
+        success: function () {
             $(th).closest('tr').hide();
         },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert('deleteWine error');
+        error: function (jqXHR, textStatus,) {
+            alert('deleteCar: ' + textStatus);
         }
     });
 }
-
-// function renderList(cars) {
-//     var list = cars == null ? [] : (cars instanceof Array ? cars : [cars]);
-//     $('#carList li').remove();
-//     $.each(list, function (index, car) {
-//         $('#carList').append('<li><a href="#" cars-identity="' + car.id + '">' + car.model + ' ' + car.colour + '<input type="button" value="Delete Row" onclick="SomeDeleteRowFunction(this)"></li></a>');
-//         // $('#carList').append('<input type="button" value="Delete Row" onclick="SomeDeleteRowFunction(this)"></li>');
-//     });
-// }
 
 function renderDetails(car) {
     $('#id').val(car.id);
@@ -187,8 +112,7 @@ function renderDetails(car) {
     $('#colour').val(car.colour);
 }
 
-function formToJSON() {
-    var id = $('#id').val();
+function formToJSON(id) {
     return JSON.stringify({
         "id": id == "" ? null : id,
         "model": $('#model').val(),
@@ -207,13 +131,12 @@ function renderList(cars) {
                 '<td>' + car.id + '</td>' +
                 '<td>' + car.model + '</td>' +
                 '<td>' + car.colour + '</td>' +
-                '<td style="width: 100px"><button class=\'btn btn-primary \' onclick="removeCar(' + car.id + ', this)">Remove</button></td>' +
+                '<td style="width: 100px"><button class=\'btn btn-danger \' onclick="removeCar(' + car.id + ', this)">Remove</button></td>' +
                 '<td style="width: 100px"><button class=\'btn btn-primary \' onclick="updateCar(' + car.id + ', this)">Update</button></td>' +
                 '</tr>')
         });
     } else {
-        tableBody.append('<tr><td colspan="4">No matching records found</td></tr>')
+        tableBody.append('<tr><td colspan="4" align="center">No matching records found</td></tr>')
     }
-
     tableBody.show();
 }

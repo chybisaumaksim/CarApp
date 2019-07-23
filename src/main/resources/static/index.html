@@ -6,7 +6,6 @@
     <meta content="utf-8" http-equiv="encoding">
     <link rel="stylesheet" type="text/css"
           href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.3/dist/bootstrap-table.min.css">
     <link rel="stylesheet" type="text/css" href="css/myStyle.css">
 </head>
 <body>
@@ -26,38 +25,29 @@
 </div>
 
 <form id="carForm">
+    <table class="table table-bordered table-hover">
+        <tr>
+            <td colspan="2" align="center">
+                <p>Add new car</p>
+            </td>
+        <tr>
+        <tr>
+            <td>
+                <label>Model :</label>
+                <input type="text" id="model">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Colour:</label>
+                <input type="text" id="colour"/>
+            </td>
+        </tr>
+    </table>
+    <button class='btn btn-success' id="btnSave"> Add </button>
+    </div>
 
     <div class="mainArea">
-
-        <!--         <p1>Add new car</p1>-->
-        <!--        <table>-->
-        <!--            <input hidden id="id" name="id" type="text" disabled/>-->
-        <!--            <th>-->
-        <!--                <label>Model:</label>-->
-        <!--                <input type="text" id="model" >-->
-        <!--            </th>-->
-        <!--            <th>-->
-        <!--                <label>Colour:</label>-->
-        <!--                <input type="text" id="colour" />-->
-        <!--            </th>-->
-        <!--        </table>-->
-        <table class="table table-bordered table-hover">
-            <thead>
-            <p1>Add new car</p1>
-            <tr>
-                <th>
-                    <label>Model:</label>
-                    <input type="text" id="model">
-                </th>
-                <th>
-                    <label>Colour:</label>-->
-                    <input type="text" id="colour"/>
-                </th>
-            </tr>
-            </thead>
-        </table>
-
-
         <table id="carList" class="table table-bordered table-hover">
             <thead>
             <tr>
@@ -71,15 +61,10 @@
             <tbody id="cars_table_body">
             </tbody>
         </table>
-
-
-    </div>
-    <button id="btnSave">Add</button>
-    <!--        <button id="btnDelete">Delete</button>-->
     </div>
 </form>
 
-<script src="js/jquery-3.4.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="js/main.js"></script>
 
 </body>

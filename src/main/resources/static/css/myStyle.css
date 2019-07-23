@@ -1,6 +1,12 @@
-p1 {
+p{
     font-family:'Times New Roman', Times, serif;
     font-weight:bold;
-    font-size:30px;
-    text-align: center
+    font-size:40px;
+    text-align:center
+}
+
+tr{
+    font-family:'Times New Roman', Times, serif;
+    font-weight:bold;
+    font-size:16px;
 }
