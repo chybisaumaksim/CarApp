@@ -22,10 +22,10 @@ function search(colour) {
     return false;
 }
 
-function newCar() {
-    currentCar = {};
-    renderDetails(currentCar);
-}
+// function newCar() {
+//     currentCar = {};
+//     renderDetails(currentCar);
+// }
 
 function findAll() {
     console.log('findAll');
@@ -44,8 +44,8 @@ function findByColour(colour) {
         url: rootURL + '/byColour/' + colour,
         dataType: "json",
         success: renderList,
-        error: function (jqXHR, textStatus) {
-            alert('findCars: ' + textStatus);
+        error: function () {
+            findAll();
         }
     });
 }
@@ -59,17 +59,17 @@ function addCar() {
         dataType: "json",
         data: formToJSON(),
         success:
-            function (car, textStatus, jqXHR) {
+            function (car) {
                 $('#cars_table_body').append(
                     '<tr>' +
-                    '<td>' + car.id + '</td>' +
-                    '<td>' + car.model + '</td>' +
-                    '<td>' + car.colour + '</td>' +
+                    '<td>' + car.id + ' </td>' +
+                    '<td contenteditable="true">' + car.model + '</td>' +
+                    '<td contenteditable="true">' + car.colour + '</td>' +
                     '<td style="width: 100px"><button class=\'btn btn-danger \' onclick="removeCar(' + car.id + ', this)">Remove</button></td>' +
-                    '<td style="width: 100px"><button class=\'btn btn-primary \' onclick="updateCar(' + car.id + ')">Update</button></td>' +
+                    '<td style="width: 100px"><button class=\'btn btn-primary \' onclick="updateCar(' + car.id + ', this)">Update</button></td>' +
                     '</tr>');
             },
-        error: function (jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus) {
             alert('addCar: ' + textStatus);
         }
     });
@@ -84,13 +84,31 @@ function updateCar(id, th) {
         dataType: "json",
         data: formToJSON(id),
         success: function () {
-            $(th).closest('tr').hide();
+            findAll();
         },
         error: function (jqXHR, textStatus,) {
             alert('updateCar: ' + textStatus);
         }
     });
 }
+
+// function updateCar2(car) {
+//     console.log('updateCar');
+//     $.ajax({
+//         type: 'PUT',
+//         contentType: 'application/json',
+//         url: rootURL + '/' + car.id,
+//         dataType: "json",
+//         data: renderDetails(),
+//         data: formToJSON2(car),
+//         success: function () {
+//             findAll();
+//         },
+//         error: function (jqXHR, textStatus,) {
+//             alert('updateCar: ' + textStatus);
+//         }
+//     });
+// }
 
 function removeCar(id, th) {
     console.log('removeCar');
@@ -106,11 +124,11 @@ function removeCar(id, th) {
     });
 }
 
-function renderDetails(car) {
-    $('#id').val(car.id);
-    $('#model').val(car.model);
-    $('#colour').val(car.colour);
-}
+// function renderDetails(car) {
+//     $('#id').val(car.id);
+//     $('#model').val(car.model);
+//     $('#colour').val(car.colour);
+// }
 
 function formToJSON(id) {
     return JSON.stringify({
@@ -119,6 +137,14 @@ function formToJSON(id) {
         "colour": $('#colour').val()
     });
 }
+
+// function formToJSON2(id, model, colour) {
+//     return JSON.stringify({
+//         "id": id == "" ? null : id,
+//         "model": model,
+//         "colour": colour
+//     });
+// }
 
 function renderList(cars) {
     var tableBody = $('#cars_table_body');
@@ -129,10 +155,11 @@ function renderList(cars) {
             tableBody.append(
                 '<tr>' +
                 '<td>' + car.id + '</td>' +
-                '<td>' + car.model + '</td>' +
-                '<td>' + car.colour + '</td>' +
+                '<td contenteditable="true">' + car.model + '</td>' +
+                '<td contenteditable="true">' + car.colour + '</td>' +
                 '<td style="width: 100px"><button class=\'btn btn-danger \' onclick="removeCar(' + car.id + ', this)">Remove</button></td>' +
                 '<td style="width: 100px"><button class=\'btn btn-primary \' onclick="updateCar(' + car.id + ', this)">Update</button></td>' +
+                // '<td style="width: 100px"><button class=\'btn btn-primary \' onclick="updateCar2('+car+')">Update</button></td>' +
                 '</tr>')
         });
     } else {

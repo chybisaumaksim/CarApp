@@ -1,12 +1,53 @@
-p{
-    font-family:'Times New Roman', Times, serif;
-    font-weight:bold;
-    font-size:40px;
-    text-align:center
+p {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    font-size: 40px;
+    text-align: center
+
 }
 
-tr{
-    font-family:'Times New Roman', Times, serif;
-    font-weight:bold;
-    font-size:16px;
+tr {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    font-size: 20px;
 }
+
+body {
+    background-image: url("https://imgfon.ru/Images/Download/Crop/2048x1152/Abstraction/belyiy_fon-polosyi-seryiy-linii.jpg?img.20");
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+tbody:first-child > tr:first-child > th {
+    background-image: url("http://www.tern.ru/wp-content/uploads/2016/03/Orange-Curves-wallpaper-2400x1350.jpg");
+    background-size: cover;
+}
+
+.t {
+    font-size: 20px;
+    text-align: right;
+    margin: 10px;
+}
+
+.btn-sm {
+    padding: 5px 5px;
+    font-size: 16px;
+    line-height: 1.5;
+    border-radius: 10px;
+}
+
+select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    font-size: 20px;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #5cb85c;
+    font-size: 12px;
+}
+
+
