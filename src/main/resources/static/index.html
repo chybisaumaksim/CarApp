@@ -3,51 +3,55 @@
 <head>
     <title>Cars</title>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-    <meta content="utf-8">
     <link rel="stylesheet" type="text/css"
           href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/myStyle.css">
 </head>
 <body>
-
-    <p class="t" align="right">
-        <button id="btnSearch" type="submit" id="bth-search" style="width: 5%"
-                class="btn btn-primary btn-sm">Search
-        </button>
-        <select id="searchKey">
-            <option value="" selected>SHOW ALL</option>
-            <option value="RED">RED</option>
-            <option value="BLUE">BLUE</option>
-            <option value="GREEN">GREEN</option>
-        </select>
-    </p>
+<p class="t" align="right">
+    <button id="btnSearch" type="submit" style="width: 5%"
+            class="btn btn-primary btn-sm">Search
+    </button>
+    <select id="searchKey">
+        <option value="" selected>SHOW ALL</option>
+        <option value="RED">RED</option>
+        <option value="BLUE">BLUE</option>
+        <option value="GREEN">GREEN</option>
+    </select>
+</p>
 
 <table class="table table-bordered table-hover">
-        <tr>
-            <th colspan="2" align="center">
-                <p>Add new car</p>
-            </th>
-        <tr>
-        <tr>
-            <td>
-                <label>Model :</label>
-                <input type="text" id="model">
-            </td>
-        </tr>
-        <tr>
-            <td>
-
-                <label>Colour:</label>
-                <select id="colour">
-                    <option value="RED">RED</option>
-                    <option value="BLUE">BLUE</option>
-                    <option value="GREEN">GREEN</option>
-                </select>
-    </div>
-    </td>
+    <tr>
+        <th colspan="2" align="center">
+            <p>Add new car</p>
+        </th>
+    <tr>
+    <tr>
+        <td>
+            <label hidden>Id : </label>
+            <input type="text" id="id" disabled hidden>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Model :</label>
+            <input type="text" id="model">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Colour:</label>
+            <select id="colour">
+                <option value="RED">RED</option>
+                <option value="BLUE">BLUE</option>
+                <option value="GREEN">GREEN</option>
+            </select>
+            </div>
+        </td>
     </tr>
 </table>
-<button class='btn btn-success' id="btnSave" style="width: 4%" style="font-size:16px">Save </button>
+<button class='btn btn-success' id="btnSave">Create</button>
+<button class='btn btn-info' id="btnUpdate">Update</button>
 
 <div class="mainArea">
     <table id="carList" class="table table-bordered table-hover">
@@ -56,7 +60,6 @@
             <th>ID</th>
             <th>Model</th>
             <th>Colour</th>
-            <th></th>
             <th></th>
         </tr>
         </thead>

@@ -3,7 +3,6 @@ p {
     font-weight: bold;
     font-size: 40px;
     text-align: center
-
 }
 
 tr {
@@ -39,15 +38,14 @@ tbody:first-child > tr:first-child > th {
 
 select, textarea {
     font-family: inherit;
-    font-size: inherit;
     line-height: inherit;
     font-size: 20px;
 }
 
-.btn-success {
-    color: #fff;
-    background-color: #5cb85c;
-    font-size: 12px;
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+    padding: 8px;
+    line-height: 1.42857143;
+    border-top: 1px solid #ddd;
 }
 
 
