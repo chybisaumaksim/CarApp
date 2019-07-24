@@ -69,6 +69,7 @@ function addCar() {
                     '<td style="width: 100px"><button class=\'btn btn-danger \' onclick="removeCar(' + car.id + ', this)">Remove</button></td>' +
                     '</tr>');
                 $('#btnUpdate').hide();
+                renderDetailsEmpty();
             },
         error: function (jqXHR, textStatus) {
             alert('addCar: ' + textStatus);
@@ -76,16 +77,26 @@ function addCar() {
     });
 }
 
+$('#Selector')
+
 function updateCar(id) {
     console.log('updateCar ' + id);
+    const row = "row";
     $.ajax({
         type: 'PUT',
         contentType: 'application/json',
         url: rootURL + '/' + $('#id').val(),
         dataType: "json",
         data: updateFormToJSON(),
-        success: function () {
-            findAll();
+        success: function (car) {
+            $('#' + row + car.id).replaceWith(
+                $('<tr id=' + row + car.id + '/>').append(
+                    '<td>' + car.id + ' </td>' +
+                    '<td style="width: 600px"><a href="#" data-identity="' + car.id + '">' + car.model + '</td>' +
+                    '<td style="width: 600px"><a href="#" data-identity="' + car.id + '">' + car.colour + '</td>' +
+                    '<td style="width: 100px"><button class=\'btn btn-danger \' onclick="removeCar(' + car.id + ', this)">Remove</button></td>' +
+                    '</tr>'),
+            )
         },
         error: function (jqXHR, textStatus) {
             alert('updateCar: ' + textStatus);
@@ -114,6 +125,12 @@ function renderDetails(car) {
     $('#colour').val(car.colour);
 }
 
+function renderDetailsEmpty() {
+    $('#id').val("");
+    $('#model').val("");
+    $('#colour').val("RED");
+}
+
 function removeCar(id, th) {
     console.log('removeCar');
     $.ajax({
@@ -122,6 +139,7 @@ function removeCar(id, th) {
         success: function () {
             $('#btnUpdate').hide();
             $(th).closest('tr').hide();
+            renderDetailsEmpty()
         },
         error: function (jqXHR, textStatus,) {
             alert('deleteCar: ' + textStatus);
@@ -144,14 +162,16 @@ function updateFormToJSON(id) {
         "colour": $('#colour').val()
     });
 }
+
 function carList(cars) {
     var tableBody = $('#cars_table_body');
     tableBody.hide();
     tableBody.empty();
+    const row = "row";
     if (cars && cars.length) {
         cars.forEach(function (car) {
             tableBody.append(
-                '<tr>' +
+                '<tr id="' + row + car.id + '">' +
                 '<td>' + car.id + '</td>' +
                 '<td style="width: 600px"><a href="#" data-identity="' + car.id + '">' + car.model + '</td>' +
                 '<td style="width: 600px"><a href="#" data-identity="' + car.id + '">' + car.colour + '</td>' +
