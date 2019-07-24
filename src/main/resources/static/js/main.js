@@ -7,21 +7,25 @@ $(document).ready(function () {
 
 $('#btnSearch').click(function () {
     search($('#searchKey').val());
+    return false;
 });
 
 $('#btnSave').click(function () {
     addCar();
     findAll();
+    return false;
 });
 
 $('#btnUpdate').click(function () {
     updateCar($('#id').val)
     findAll();
+    return false;
 });
 
 $('#carList').on('click', 'a', function () {
     console.log('inside carlist');
     findById($(this).data('identity'));
+    return false;
 });
 
 function search(colour) {
@@ -29,7 +33,6 @@ function search(colour) {
 }
 
 function findAll() {
-    console.log('findAll');
     $.ajax({
         type: 'GET',
         url: rootURL,
@@ -39,7 +42,6 @@ function findAll() {
 }
 
 function findByColour(colour) {
-    console.log('findByColour: ' + colour);
     $.ajax({
         type: 'GET',
         url: rootURL + '/byColour/' + colour,
@@ -52,7 +54,6 @@ function findByColour(colour) {
 }
 
 function addCar() {
-    console.log('addCar');
     $.ajax({
         type: 'POST',
         contentType: 'application/json',
@@ -71,16 +72,16 @@ function addCar() {
                 $('#btnUpdate').hide();
                 renderDetailsEmpty();
             },
-        error: function (jqXHR, textStatus) {
-            alert('addCar: ' + textStatus);
+        error: function (jqXHR, textStatus, message) {
+            swal({
+                title: 'Oops...',
+                text: message
+            })
         }
     });
 }
 
-$('#Selector')
-
 function updateCar(id) {
-    console.log('updateCar ' + id);
     const row = "row";
     $.ajax({
         type: 'PUT',
@@ -119,7 +120,6 @@ function findById(id) {
 }
 
 function renderDetails(car) {
-    console.log('renderDetails: ' + car.id);
     $('#id').val(car.id);
     $('#model').val(car.model);
     $('#colour').val(car.colour);
@@ -132,7 +132,6 @@ function renderDetailsEmpty() {
 }
 
 function removeCar(id, th) {
-    console.log('removeCar');
     $.ajax({
         type: 'DELETE',
         url: rootURL + '/' + id,

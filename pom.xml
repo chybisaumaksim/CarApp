@@ -36,6 +36,9 @@
         <springfox-swagger2>2.9.2</springfox-swagger2>
         <spring-boot-starter-data-jpa>2.1.6.RELEASE</spring-boot-starter-data-jpa>
         <liquibase-maven-plugin>3.6.2</liquibase-maven-plugin>
+        <jquery>2.2.4</jquery>
+        <bootstrap>3.3.7</bootstrap>
+        <sweetalert>0.4.1</sweetalert>
     </properties>
 
     <dependencies>
@@ -144,10 +147,10 @@
             <version>${liquibase-maven-plugin}</version>
         </dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -158,16 +161,22 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
-            <version>2.2.4</version>
+            <version>${jquery}</version>
         </dependency>
 
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
-            <version>3.3.7</version>
+            <version>${bootstrap}</version>
         </dependency>
 
-	</dependencies>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>sweetalert</artifactId>
+            <version>${sweetalert}</version>
+        </dependency>
+
+    </dependencies>
 
     <build>
         <plugins>
