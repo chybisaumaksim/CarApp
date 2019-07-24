@@ -86,7 +86,6 @@ function updateCar(id) {
         data: updateFormToJSON(),
         success: function () {
             findAll();
-            // $(th).closest('tr').hide();
         },
         error: function (jqXHR, textStatus) {
             alert('updateCar: ' + textStatus);
@@ -121,6 +120,7 @@ function removeCar(id, th) {
         type: 'DELETE',
         url: rootURL + '/' + id,
         success: function () {
+            $('#btnUpdate').hide();
             $(th).closest('tr').hide();
         },
         error: function (jqXHR, textStatus,) {
