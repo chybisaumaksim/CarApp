@@ -38,7 +38,7 @@
         <liquibase-maven-plugin>3.6.2</liquibase-maven-plugin>
         <jquery>2.2.4</jquery>
         <bootstrap>3.3.7</bootstrap>
-        <sweetalert>0.4.1</sweetalert>
+        <sweetalert2>6.2.1</sweetalert2>
     </properties>
 
     <dependencies>
@@ -171,9 +171,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>sweetalert</artifactId>
-            <version>${sweetalert}</version>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>sweetalert2</artifactId>
+            <version>${sweetalert2}</version>
         </dependency>
 
     </dependencies>

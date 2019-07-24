@@ -72,10 +72,11 @@ function addCar() {
                 $('#btnUpdate').hide();
                 renderDetailsEmpty();
             },
-        error: function (jqXHR, textStatus, message) {
+        error: function () {
             swal({
+                type: 'error',
                 title: 'Oops...',
-                text: message
+                text: "Create car error"
             })
         }
     });
@@ -99,8 +100,12 @@ function updateCar(id) {
                     '</tr>'),
             )
         },
-        error: function (jqXHR, textStatus) {
-            alert('updateCar: ' + textStatus);
+        error: function () {
+            swal({
+                type: 'error',
+                title: 'Oops...',
+                text: "Update car error"
+            })
         }
     });
 }
@@ -140,8 +145,12 @@ function removeCar(id, th) {
             $(th).closest('tr').hide();
             renderDetailsEmpty()
         },
-        error: function (jqXHR, textStatus,) {
-            alert('deleteCar: ' + textStatus);
+        error: function () {
+            swal({
+                type: 'error',
+                title: 'Oops...',
+                text: "Remove car error"
+            })
         }
     });
 }
