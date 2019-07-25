@@ -73,10 +73,10 @@ function addCar() {
                 renderDetailsEmpty();
             },
         error: function () {
-            swal({
+            Swal.fire({
                 type: 'error',
                 title: 'Oops...',
-                text: "Create car error"
+                text: 'Something went wrong!',
             })
         }
     });
@@ -101,10 +101,10 @@ function updateCar(id) {
             )
         },
         error: function () {
-            swal({
+            Swal.fire({
                 type: 'error',
                 title: 'Oops...',
-                text: "Update car error"
+                text: 'Something went wrong!',
             })
         }
     });
@@ -146,10 +146,10 @@ function removeCar(id, th) {
             renderDetailsEmpty()
         },
         error: function () {
-            swal({
+            Swal.fire({
                 type: 'error',
                 title: 'Oops...',
-                text: "Remove car error"
+                text: 'Something went wrong!',
             })
         }
     });
